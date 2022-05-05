@@ -1,0 +1,10 @@
+<entities >
+  <entity name="axx_resultadosventadirecta" displayname="Resultados Venta Directa" etc="10263" primaryidfield="axx_resultadosventadirectaid" primarynamefield="axx_name" disableplugins="false">
+    <fields>
+      <field displayname="Contactado" name="axx_contactado" type="bool" customfield="true" />
+      <field displayname="Resultado" name="axx_name" type="string" customfield="true" />
+      <field displayname="Resultados Venta Directa" name="axx_resultadosventadirectaid" type="guid" primaryKey="true" />
+      <field displayname="Estado de VD" name="axx_estadovd" type="entityreference" lookupType="axx_estadoventadirecta" customfield="true" />
+    </fields>
+  </entity>
+</entities>

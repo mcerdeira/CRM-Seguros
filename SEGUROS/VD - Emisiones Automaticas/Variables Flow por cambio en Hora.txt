@@ -1,0 +1,21 @@
+HH:
+first(split(outputs('Hora'),':'))
+
+MM:
+first(skip(split(outputs('Hora'),':'),1))
+
+SS:
+first(skip(split(outputs('Hora'),':'),2))
+
+HHOK:
+if(equals(1, length(outputs('HH'))), concat('0', outputs('HH')), outputs('HH'))
+
+MMOK:
+if(equals(1, length(outputs('MM'))), concat('0', outputs('MM')), outputs('MM'))
+
+SSOK:
+if(equals(1, length(outputs('SS'))), concat('0', outputs('SS')), outputs('SS'))
+
+
+fechaCompuesta:
+concat(outputs('año2'),'-',outputs('mes'),'-',outputs('dia'),'T',outputs('HHOK'), ':',outputs('MMOK'), ':', outputs('SSOK'),'.0000000Z')

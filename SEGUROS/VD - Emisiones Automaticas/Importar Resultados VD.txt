@@ -1,0 +1,2 @@
+Importar resultados
+(ver adjunto) (agregar los campos Resultado, Contactado, ResultadoId y Estado VD)

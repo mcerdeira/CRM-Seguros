@@ -1,0 +1,1752 @@
+{
+	"info": {
+		"_postman_id": "2dac7ba0-b5aa-41cc-8a0e-e92b20bce44c",
+		"name": "Invocaciones a servicios de Plugins",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Desarrollo",
+			"item": [
+				{
+					"name": "Alta personas DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"axx_Actividad@odata.bind\":\"\",\r\n\t\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(1413289c-f4b5-e811-a96d-000d3ac1bbe7)\",\r\n\t\"axx_Profesion@odata.bind\":\"axx_profesions(a58d6171-769a-e811-a968-000d3ac1b1e6)\",\r\n\t\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\t\"axx_apellido\":\"QUITO\",\r\n\t\"axx_cuit\":\"20341457468\",\r\n\t\"axx_esproductor\":\"False\",\r\n\t\"axx_estadocivil\":\"282270000\",\r\n\t\"axx_fechanacimiento\":\"2018-10-1\",\r\n\t\"axx_genero\":\"282270001\",\r\n\t\"axx_guid\":\"accounts(b0e9fe00-7ddc-e811-a974-000d3ac1bbbc)\",\r\n\t\"axx_idrector\":\"\",\r\n\t\"axx_nombre\":\"ESTEBAN\",\r\n\t\"axx_numerodocumento\":\"21200246\",\r\n\t\"axx_pep\":\"282270001\",\r\n\t\"axx_razonsocial\":\"\",\r\n\t\"axx_sujetoobligado\":\"282270001\",\r\n\t\"axx_tipodocumento\":\"282270000\",\r\n\t\"axx_tipopersona\":\"282270000\",\r\n\t\"name\":\"ESTEBAN QUITO\",\r\n\t\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta personas DESA Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"axx_Actividad@odata.bind\":\"\",\r\n\t\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(1413289c-f4b5-e811-a96d-000d3ac1bbe7)\",\r\n\t\"axx_Profesion@odata.bind\":\"axx_profesions(a58d6171-769a-e811-a968-000d3ac1b1e6)\",\r\n\t\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\t\"axx_apellido\":\"QUITO\",\r\n\t\"axx_cuit\":\"20341457468\",\r\n\t\"axx_esproductor\":\"False\",\r\n\t\"axx_estadocivil\":\"282270000\",\r\n\t\"axx_fechanacimiento\":\"2018-10-1\",\r\n\t\"axx_genero\":\"282270001\",\r\n\t\"axx_guid\":\"accounts(b0e9fe00-7ddc-e811-a974-000d3ac1bbbc)\",\r\n\t\"axx_idrector\":\"\",\r\n\t\"axx_nombre\":\"ESTEBAN\",\r\n\t\"axx_numerodocumento\":\"21200246\",\r\n\t\"axx_pep\":\"282270001\",\r\n\t\"axx_razonsocial\":\"\",\r\n\t\"axx_sujetoobligado\":\"282270001\",\r\n\t\"axx_tipodocumento\":\"282270000\",\r\n\t\"axx_tipopersona\":\"282270000\",\r\n\t\"name\":\"ESTEBAN QUITO\",\r\n\t\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Búsqueda de certificados DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"axx_Actividad@odata.bind\":\"\",\r\n\t\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(1413289c-f4b5-e811-a96d-000d3ac1bbe7)\",\r\n\t\"axx_Profesion@odata.bind\":\"axx_profesions(a58d6171-769a-e811-a968-000d3ac1b1e6)\",\r\n\t\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\t\"axx_apellido\":\"QUITO\",\r\n\t\"axx_cuit\":\"20341457468\",\r\n\t\"axx_esproductor\":\"False\",\r\n\t\"axx_estadocivil\":\"282270000\",\r\n\t\"axx_fechanacimiento\":\"2018-10-1\",\r\n\t\"axx_genero\":\"282270001\",\r\n\t\"axx_guid\":\"accounts(b0e9fe00-7ddc-e811-a974-000d3ac1bbbc)\",\r\n\t\"axx_idrector\":\"\",\r\n\t\"axx_nombre\":\"ESTEBAN\",\r\n\t\"axx_numerodocumento\":\"21200246\",\r\n\t\"axx_pep\":\"282270001\",\r\n\t\"axx_razonsocial\":\"\",\r\n\t\"axx_sujetoobligado\":\"282270001\",\r\n\t\"axx_tipodocumento\":\"282270000\",\r\n\t\"axx_tipopersona\":\"282270000\",\r\n\t\"name\":\"ESTEBAN QUITO\",\r\n\t\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Envío de novedad DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"axx_Actividad@odata.bind\":\"\",\r\n\t\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(1413289c-f4b5-e811-a96d-000d3ac1bbe7)\",\r\n\t\"axx_Profesion@odata.bind\":\"axx_profesions(a58d6171-769a-e811-a968-000d3ac1b1e6)\",\r\n\t\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\t\"axx_apellido\":\"QUITO\",\r\n\t\"axx_cuit\":\"20341457468\",\r\n\t\"axx_esproductor\":\"False\",\r\n\t\"axx_estadocivil\":\"282270000\",\r\n\t\"axx_fechanacimiento\":\"2018-10-1\",\r\n\t\"axx_genero\":\"282270001\",\r\n\t\"axx_guid\":\"accounts(b0e9fe00-7ddc-e811-a974-000d3ac1bbbc)\",\r\n\t\"axx_idrector\":\"\",\r\n\t\"axx_nombre\":\"ESTEBAN\",\r\n\t\"axx_numerodocumento\":\"21200246\",\r\n\t\"axx_pep\":\"282270001\",\r\n\t\"axx_razonsocial\":\"\",\r\n\t\"axx_sujetoobligado\":\"282270001\",\r\n\t\"axx_tipodocumento\":\"282270000\",\r\n\t\"axx_tipopersona\":\"282270000\",\r\n\t\"name\":\"ESTEBAN QUITO\",\r\n\t\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificación personas DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"axx_Actividad@odata.bind\":\"\",\r\n\t\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(1413289c-f4b5-e811-a96d-000d3ac1bbe7)\",\r\n\t\"axx_Profesion@odata.bind\":\"axx_profesions(a58d6171-769a-e811-a968-000d3ac1b1e6)\",\r\n\t\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\t\"axx_apellido\":\"QUITO\",\r\n\t\"axx_cuit\":\"20341457468\",\r\n\t\"axx_esproductor\":\"False\",\r\n\t\"axx_estadocivil\":\"282270000\",\r\n\t\"axx_fechanacimiento\":\"2018-10-1\",\r\n\t\"axx_genero\":\"282270001\",\r\n\t\"axx_guid\":\"accounts(b0e9fe00-7ddc-e811-a974-000d3ac1bbbc)\",\r\n\t\"axx_idrector\":\"\",\r\n\t\"axx_nombre\":\"ESTEBAN\",\r\n\t\"axx_numerodocumento\":\"21200246\",\r\n\t\"axx_pep\":\"282270001\",\r\n\t\"axx_razonsocial\":\"\",\r\n\t\"axx_sujetoobligado\":\"282270001\",\r\n\t\"axx_tipodocumento\":\"282270000\",\r\n\t\"axx_tipopersona\":\"282270000\",\r\n\t\"name\":\"ESTEBAN QUITO\",\r\n\t\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta teléfonos DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"axx_Personaid@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n    \"axx_tipotelefono\": 282270001, \r\n    \"axx_caracteristica\": \"4793\", \r\n    \"axx_telefononormalizado\": \"541147933000\", \r\n    \"axx_numero\": \"3000\", \r\n    \"axx_ddn\": \"11\", \r\n    \"axx_ddi\": \"54\", \r\n    \"axx_esprincipal\": 282270000, \r\n    \"axx_name\": \"Particular\", \r\n    \"axx_prefijo\": \"23\",\r\n    \"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/telefonos",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"telefonos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta domicilios DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"axx_CodigoPostal@odata.bind\":\"axx_localidads(58629ec4-b0a7-e811-a96c-000d3ac1bbbc)\",\"axx_Localidad@odata.bind\":\"axx_localidads(58629ec4-b0a7-e811-a96c-000d3ac1bbbc)\",\"axx_Pais@odata.bind\":\"axx_paises(8b4f07e3-9ca7-e811-a96f-000d3ac1bf27)\",\"axx_Partido@odata.bind\":\"axx_partidos(e9775341-9fa7-e811-a96f-000d3ac1bf27)\",\"axx_PersonaId@odata.bind\":\"accounts(143e4e74-88b7-e811-a96e-000d3ac1b8d2)\",\"axx_Provincia@odata.bind\":\"axx_provincias(95a592d3-9ea7-e811-a96a-000d3ac1b1e6)\",\"axx_calle\":\"Balcarce\",\"axx_codigodomicilio\":\"\",\"axx_codigopostal_1\":\"1425\",\"axx_departamento\":\"\",\"axx_domicilionormalizado\":\"Balcarce 450  \",\"axx_entrecalle1\":\"\",\"axx_entrecalle2\":\"\",\"axx_esprincipal\":\"282270001\",\"axx_guid\":\"axx_domicilios(8fd14f4e-50dc-e811-a977-000d3ac1bf27)\",\"axx_iddomicilio\":\"1\",\"axx_name\":\"\",\"axx_numero\":\"450\",\"axx_piso\":\"\",\"axx_tipodomicilio\":\"282270000\"}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/domicilios",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"domicilios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta correos electrónicos DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\t\"axx_PersonaId@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n\t\"axx_correoelectronico1\":\"andres@tunegocio.com.ar\", \r\n\t\"axx_TipoCorreoElectronico@odata.bind\":\"axx_tipodecorreoelectronicos(3b21d5dd-e49b-e811-a96b-000d3ac1bbbc)\", \r\n\t\"axx_esprincipal\":282270000, \r\n\t\"axx_name\":\"Correo Electr\\u00f3nico\",\r\n\t\"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n} \r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/correoselectronicos?",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"correoselectronicos"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+									"disabled": true
+								},
+								{
+									"key": "environment",
+									"value": "ENVIRONMENT_QA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta correos electrónicos DESA mvo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\t\"axx_PersonaId@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n\t\"axx_correoelectronico1\":\"andres@tunegocio.com.ar\", \r\n\t\"axx_TipoCorreoElectronico@odata.bind\":\"axx_tipodecorreoelectronicos(3b21d5dd-e49b-e811-a96b-000d3ac1bbbc)\", \r\n\t\"axx_esprincipal\":282270000, \r\n\t\"axx_name\":\"Correo Electr\\u00f3nico\",\r\n\t\"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n} \r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/correoselectronicos?",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"correoselectronicos"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+									"disabled": true
+								},
+								{
+									"key": "environment",
+									"value": "ENVIRONMENT_QA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ramos DESA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/92907/ramos?=Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"92907",
+								"ramos"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liquidaciones DESA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDU0MDQwNjh9.VuY_BGPJRNN72QDppLapxd5sD1H8_OOBzp1ZTFHThf7NX_sbqr9NHQFwRlbKYdK5BcMBcDuVU16wJrrrnTi2cQ"
+							},
+							{
+								"key": "environment",
+								"type": "text",
+								"value": "ENVIRONMENT_QA"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/17421/siniestros/518394/ramo/4",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"17421",
+								"siniestros",
+								"518394",
+								"ramo",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Existe persona DESA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notas DESA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDI5MTQ0MDR9.0iN1Vf38HBNpFX4rkZihVsxmRNOweAIhxgy-xQbWhwwGEzSpXyf-Dd7JEqrxGazaTfmQtIL2yqdXkdbmQMtzNA",
+								"type": "text"
+							},
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/11074/siniestros/1418/ramo/7/notas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"11074",
+								"siniestros",
+								"1418",
+								"ramo",
+								"7",
+								"notas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terceros DESA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDI5MTQ0MDR9.0iN1Vf38HBNpFX4rkZihVsxmRNOweAIhxgy-xQbWhwwGEzSpXyf-Dd7JEqrxGazaTfmQtIL2yqdXkdbmQMtzNA",
+								"type": "text"
+							},
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/11074/siniestros/1418/ramo/7/terceros",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"11074",
+								"siniestros",
+								"1418",
+								"ramo",
+								"7",
+								"terceros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cobranzas - Composición deuda DESA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDI5ODY0Mzh9.tDGlpfVpKOUUaaAWoL7SLvxt34qu8VG_Dy21y_ueKK1mM27g4JkGGnwGiWGFey2TUo7zIpLFSPbJM-byUQZAKQ",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/11074/composiciondeuda",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"11074",
+								"composiciondeuda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liquidaciones DESA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Siniestros DESA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NID Desa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDYwMDY3Njl9.NwzjYltwCsLZzioQgZM5c5-kAqGvUqI8hncJCchTzlmFl7r9qbgDud39JaoOKaS6KijG3mQ2oVVrvR8Mb0Vsaw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/123/ documento/34443123/nid",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"123",
+								" documento",
+								"34443123",
+								"nid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polizas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw"
+							},
+							{
+								"key": "environment",
+								"type": "text",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/92907/ramos/4/polizas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"92907",
+								"ramos",
+								"4",
+								"polizas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polizas - Detalle Certificados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw"
+							},
+							{
+								"key": "environment",
+								"type": "text",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/92907/ramos/4/polizas/2476803/certificados/1/pagina/1",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"92907",
+								"ramos",
+								"4",
+								"polizas",
+								"2476803",
+								"certificados",
+								"1",
+								"pagina",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polizas - Detalle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE2MzU3MDE0OTh9.7wAyCH7TCqMlvQHDnHlG0JHZAAJAC3DkWR3ASmStGw0M5P99DBhS9SQMOERzyySewwJhvgBJv8gYYRCqlyVYoA"
+							},
+							{
+								"key": "environment",
+								"type": "text",
+								"value": "ENVIRONMENT_DESA"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/92907/ramos/4/polizas/2909744/4/detalle",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"92907",
+								"ramos",
+								"4",
+								"polizas",
+								"2909744",
+								"4",
+								"detalle"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Qa",
+			"item": [
+				{
+					"name": "Existe persona QA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Siniestros QA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/29001/ramos",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"29001",
+								"ramos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalle de Pólizas QA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/29001/ramos",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"29001",
+								"ramos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ramos QA",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/29001/ramos",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"29001",
+								"ramos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liquidaciones QA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NID QA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "\t"
+					},
+					"response": []
+				},
+				{
+					"name": "Alta domicilios QA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"axx_CodigoPostal@odata.bind\":\"axx_localidads(58629ec4-b0a7-e811-a96c-000d3ac1bbbc)\",\"axx_Localidad@odata.bind\":\"axx_localidads(58629ec4-b0a7-e811-a96c-000d3ac1bbbc)\",\"axx_Pais@odata.bind\":\"axx_paises(8b4f07e3-9ca7-e811-a96f-000d3ac1bf27)\",\"axx_Partido@odata.bind\":\"axx_partidos(e9775341-9fa7-e811-a96f-000d3ac1bf27)\",\"axx_PersonaId@odata.bind\":\"accounts(143e4e74-88b7-e811-a96e-000d3ac1b8d2)\",\"axx_Provincia@odata.bind\":\"axx_provincias(95a592d3-9ea7-e811-a96a-000d3ac1b1e6)\",\"axx_calle\":\"Balcarce\",\"axx_codigodomicilio\":\"\",\"axx_codigopostal_1\":\"1425\",\"axx_departamento\":\"\",\"axx_domicilionormalizado\":\"Balcarce 450  \",\"axx_entrecalle1\":\"\",\"axx_entrecalle2\":\"\",\"axx_esprincipal\":\"282270001\",\"axx_guid\":\"axx_domicilios(8fd14f4e-50dc-e811-a977-000d3ac1bf27)\",\"axx_iddomicilio\":\"1\",\"axx_name\":\"\",\"axx_numero\":\"450\",\"axx_piso\":\"\",\"axx_tipodomicilio\":\"282270000\"}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/domicilios",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"domicilios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta correos electrónicos QA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\t\"axx_PersonaId@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n\t\"axx_correoelectronico1\":\"andres@tunegocio.com.ar\", \r\n\t\"axx_TipoCorreoElectronico@odata.bind\":\"axx_tipodecorreoelectronicos(3b21d5dd-e49b-e811-a96b-000d3ac1bbbc)\", \r\n\t\"axx_esprincipal\":282270000, \r\n\t\"axx_name\":\"Correo Electr\\u00f3nico\",\r\n\t\"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n} \r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/correoselectronicos?",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"correoselectronicos"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+									"disabled": true
+								},
+								{
+									"key": "environment",
+									"value": "ENVIRONMENT_QA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta teléfonos QA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"axx_Personaid@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n    \"axx_tipotelefono\": 282270001, \r\n    \"axx_caracteristica\": \"4793\", \r\n    \"axx_telefononormalizado\": \"541147933000\", \r\n    \"axx_numero\": \"3000\", \r\n    \"axx_ddn\": \"11\", \r\n    \"axx_ddi\": \"54\", \r\n    \"axx_esprincipal\": 282270000, \r\n    \"axx_name\": \"Particular\", \r\n    \"axx_prefijo\": \"23\",\r\n    \"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/telefonos",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"telefonos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta personas JurídicasQA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "ENVIRONMENT_QA"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_QA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"axx_Actividad@odata.bind\":\"\",\r\n\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(ee4d4081-5ea1-e811-a967-000d3ac1b7b6)\",\r\n\"axx_Profesion@odata.bind\":\"axx_profesions(087d2d04-7b9a-e811-a968-000d3ac1b1e6)\",\r\n\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\"axx_apellido\":\"MartÃ­nez\",\r\n\"axx_cuit\":\"202020\",\r\n\"axx_esproductor\":\"False\",\r\n\"axx_estadocivil\":\"282270000\",\r\n\"axx_fechanacimiento\":\"2018-10-29\",\r\n\"axx_genero\":\"282270001\",\r\n\"axx_guid\":\"accounts(1f6d6e31-b3db-e811-a974-000d3ac1bbbc)\",\r\n\"axx_idrector\":\"\",\r\n\"axx_nombre\":\"Daniel\",\r\n\"axx_numerodocumento\":\"20200241\",\r\n\"axx_pep\":\"282270001\",\r\n\"axx_razonsocial\":\"\",\r\n\"axx_sujetoobligado\":\"282270001\",\r\n\"axx_tipodocumento\":\"282270001\",\r\n\"axx_tipopersona\":\"282270000\",\r\n\"name\":\"Daniel MartÃ­nez\",\r\n\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta personas QA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "ENVIRONMENT_QA"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_QA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"axx_Actividad@odata.bind\":\"\",\r\n\"axx_Nacionalidad@odata.bind\":\"axx_nacionalidads(ee4d4081-5ea1-e811-a967-000d3ac1b7b6)\",\r\n\"axx_Profesion@odata.bind\":\"axx_profesions(087d2d04-7b9a-e811-a968-000d3ac1b1e6)\",\r\n\"axx_TipoOrganismo@odata.bind\":\"\",\r\n\"axx_apellido\":\"MartÃ­nez\",\r\n\"axx_cuit\":\"202020\",\r\n\"axx_esproductor\":\"False\",\r\n\"axx_estadocivil\":\"282270000\",\r\n\"axx_fechanacimiento\":\"2018-10-29\",\r\n\"axx_genero\":\"282270001\",\r\n\"axx_guid\":\"accounts(1f6d6e31-b3db-e811-a974-000d3ac1bbbc)\",\r\n\"axx_idrector\":\"\",\r\n\"axx_nombre\":\"Daniel\",\r\n\"axx_numerodocumento\":\"20200241\",\r\n\"axx_pep\":\"282270001\",\r\n\"axx_razonsocial\":\"\",\r\n\"axx_sujetoobligado\":\"282270001\",\r\n\"axx_tipodocumento\":\"282270001\",\r\n\"axx_tipopersona\":\"282270000\",\r\n\"name\":\"Daniel MartÃ­nez\",\r\n\"telephone1\":\"\"\r\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificación personas QA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDQ4MDk0Njl9.Zgc1tisDlKcgwSXNg1d2CcsU32duoCXytgmuorR8CjqAj-9C-32ER8_eN7danooW5wG0P5rpsT4yU8EjvomwvA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "ENVIRONMENT_QA"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_QA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"axx_Actividad@odata.bind\":\"axx_actividads(2ad0ffe8-9ca7-e811-a96f-000d3ac1bf27)\",\"axx_Nacionalidad@odata.bind\":\"\",\"axx_Profesion@odata.bind\":\"\",\"axx_TipoOrganismo@odata.bind\":\"\",\"axx_apellido\":\"\",\"axx_cuit\":\"30-71027079-8\",\"axx_esproductor\":\"false\",\"axx_estadocivil\":\"\",\"axx_existeenrector\":\"\",\"axx_fechanacimiento\":\"\",\"axx_genero\":\"\",\"axx_guid\":\"accounts(f9afc682-89b7-e811-a96e-000d3ac1b8d2)\",\"axx_idrector\":\"389\",\"axx_nombre\":\"\",\"axx_numerodocumento\":\"\",\"axx_pep\":\"\",\"axx_razonsocial\":\"ACTIS GORETTA SRL\",\"axx_sujetoobligado\":\"282270001\",\"axx_tipodocumento\":\"\",\"axx_tipopersona\":\"282270001\",\"name\":\"ACTIS GORETTA SRL\",\"telephone1\":\"\"}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producción",
+			"item": [
+				{
+					"name": "Get Token DESA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"dyna80micsprod\",\n  \"username\": \"dynamicsprod\"\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/authentication",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificación personas QA Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDQ4MDk0Njl9.Zgc1tisDlKcgwSXNg1d2CcsU32duoCXytgmuorR8CjqAj-9C-32ER8_eN7danooW5wG0P5rpsT4yU8EjvomwvA"
+							},
+							{
+								"key": "environment",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "ENVIRONMENT_QA"
+							},
+							{
+								"key": "Content-Type",
+								"value": "ENVIRONMENT_QA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"axx_Actividad@odata.bind\":\"axx_actividads(2ad0ffe8-9ca7-e811-a96f-000d3ac1bf27)\",\"axx_Nacionalidad@odata.bind\":\"\",\"axx_Profesion@odata.bind\":\"\",\"axx_TipoOrganismo@odata.bind\":\"\",\"axx_apellido\":\"\",\"axx_cuit\":\"30-71027079-8\",\"axx_esproductor\":\"false\",\"axx_estadocivil\":\"\",\"axx_existeenrector\":\"\",\"axx_fechanacimiento\":\"\",\"axx_genero\":\"\",\"axx_guid\":\"accounts(f9afc682-89b7-e811-a96e-000d3ac1b8d2)\",\"axx_idrector\":\"389\",\"axx_nombre\":\"\",\"axx_numerodocumento\":\"\",\"axx_pep\":\"\",\"axx_razonsocial\":\"ACTIS GORETTA SRL\",\"axx_sujetoobligado\":\"282270001\",\"axx_tipodocumento\":\"\",\"axx_tipopersona\":\"282270001\",\"name\":\"ACTIS GORETTA SRL\",\"telephone1\":\"\"}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liquidaciones PROD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NID PROD",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_DESA",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDYwMDY3Njl9.NwzjYltwCsLZzioQgZM5c5-kAqGvUqI8hncJCchTzlmFl7r9qbgDud39JaoOKaS6KijG3mQ2oVVrvR8Mb0Vsaw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/123/ documento/34443123/nid",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"123",
+								" documento",
+								"34443123",
+								"nid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta correos electrónicos DESA Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+								"type": "text"
+							},
+							{
+								"key": "environment",
+								"value": "ENVIRONMENT_QA",
+								"equals": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\t\"axx_PersonaId@odata.bind\":\"accounts(dc686373-a1ab-e811-a975-000d3ac1bcd5)\", \r\n\t\"axx_correoelectronico1\":\"andres@tunegocio.com.ar\", \r\n\t\"axx_TipoCorreoElectronico@odata.bind\":\"axx_tipodecorreoelectronicos(3b21d5dd-e49b-e811-a96b-000d3ac1bbbc)\", \r\n\t\"axx_esprincipal\":282270000, \r\n\t\"axx_name\":\"Correo Electr\\u00f3nico\",\r\n\t\"axx_guid\": \"c3f6ccea-20a6-e811-a968-000d3ac1b7b6\"\r\n} \r\n"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/correoselectronicos?",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"correoselectronicos"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDE3MDczMTJ9.gQGjSWLmwycZiGUwPVenWKrE4TS8dvlg1ZjNUsEZuZTvsXCsvzqtlFQD6s2KdqPp_nsKli6xrrEAxqHQeD5qHA",
+									"disabled": true
+								},
+								{
+									"key": "environment",
+									"value": "ENVIRONMENT_QA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ramo PROD",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_PROD",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkm.provinciaseguros.com.ar:4443/crm/api/personas/29001/ramos",
+							"protocol": "https",
+							"host": [
+								"tkm",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "4443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"29001",
+								"ramos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Poliza / Detalle PROD Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_PROD",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1OTM0NTAyODZ9.C8Ghv_JCjwfygEk3KX8IwdPdEogwRw9y4lfBDZiOw4OiJAHQBaYmlMHXDTQ2MU9DAaDAdHkp71F2HelVv8KlQw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkm.provinciaseguros.com.ar:4443/crm/api/personas/29001/ramos",
+							"protocol": "https",
+							"host": [
+								"tkm",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "4443",
+							"path": [
+								"crm",
+								"api",
+								"personas",
+								"29001",
+								"ramos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta Correo Electronico",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Environment",
+								"value": "ENVIRONMENT_PROD",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE2MDk0MjQ3ODl9.W_3hJJGU1ywklxFJIJbTzgor8PsFaMIXZkaigzY5aekBZQA1UJ1eWdXxSMo9CwkX4cT5XzZRrPk7fcfQDhPo8Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tkm.provinciaseguros.com.ar:4443/crm/api/correoselectronicos/",
+							"protocol": "https",
+							"host": [
+								"tkm",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "4443",
+							"path": [
+								"crm",
+								"api",
+								"correoselectronicos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta Telefono",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Environment",
+								"type": "text",
+								"value": "ENVIRONMENT_PROD"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE2MDk1MTcwOTF9.aCHlYQ18OceMdEhj_KyPVV3Fg0FJbcdjbwOnKMsh7fV7cFej0KUq7RadREw5U6O3huTt3ny10PykCS3T2VWQpg"
+							}
+						],
+						"url": {
+							"raw": "https://tkm.provinciaseguros.com.ar:4443/crm/api/telefonos/",
+							"protocol": "https",
+							"host": [
+								"tkm",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "4443",
+							"path": [
+								"crm",
+								"api",
+								"telefonos",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"password\": \"dyna80micsprod\",\n  \"username\": \"dynamicsprod\"\n}"
+				},
+				"url": {
+					"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/authentication",
+					"protocol": "https",
+					"host": [
+						"tkmt",
+						"provinciaseguros",
+						"com",
+						"ar"
+					],
+					"port": "5443",
+					"path": [
+						"crm",
+						"api",
+						"authentication"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"dyna80micsprod\",\n  \"username\": \"dynamicsprod\"\n}"
+						},
+						"url": {
+							"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/authentication",
+							"protocol": "https",
+							"host": [
+								"tkmt",
+								"provinciaseguros",
+								"com",
+								"ar"
+							],
+							"port": "5443",
+							"path": [
+								"crm",
+								"api",
+								"authentication"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 21 Oct 2021 12:53:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "sameorigin"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "false"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE2MzU2ODQ3OTR9.Jr7dPSwHXVIWxLKM2d0enVcOU6dxJndr5aYN2ebKDEKVR_1IbCKCPwsqIV-LU0rGJICJRNr9k4hJ4BJNEl7w6Q"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=15, max=75"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Cobranzas - Estado deuda DESA Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkeW5hbWljc3Byb2QiLCJleHAiOjE1NDI5ODY0Mzh9.tDGlpfVpKOUUaaAWoL7SLvxt34qu8VG_Dy21y_ueKK1mM27g4JkGGnwGiWGFey2TUo7zIpLFSPbJM-byUQZAKQ",
+						"type": "text"
+					},
+					{
+						"key": "environment",
+						"value": "ENVIRONMENT_DESA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://tkmt.provinciaseguros.com.ar:5443/crm/api/personas/11074/composiciondeuda",
+					"protocol": "https",
+					"host": [
+						"tkmt",
+						"provinciaseguros",
+						"com",
+						"ar"
+					],
+					"port": "5443",
+					"path": [
+						"crm",
+						"api",
+						"personas",
+						"11074",
+						"composiciondeuda"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PSEGUROS CRM test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

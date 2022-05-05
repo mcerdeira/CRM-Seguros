@@ -1,0 +1,9 @@
+var DNI = trim(replace(first(split(last(split(variables('varBody'),'>>DNI:')), ']')), '[', ''));
+var mail = trim(replace(first(split(last(split(variables('varBody'),'>>Mail:')), ']')), '[', ''));
+var telefono = trim(replace(first(split(last(split(variables('varBody'),'>>Telefono:')), ']')), '[', ''));
+var Celular = trim(replace(first(split(last(split(variables('varBody'),'>>Celular:')), ']')), '[', ''));
+var Cotizacion = trim(replace(first(split(last(split(variables('varBody'),'>>Cotizacion:')), ']')), '[', ''));
+var marca = trim(replace(first(split(last(split(variables('varBody'),'>>Marca:')), ']')), '[', ''));
+var Ano = trim(replace(first(split(last(split(variables('varBody'),'>>Ano de fabricacion:')), ']')), '[', ''));
+var OKM = trim(replace(first(split(last(split(variables('varBody'),'>>0KM:')), ']')), '[', ''));
+var planseleccionado = trim(replace(first(split(last(split(variables('varBody'),'>>Plan seleccionado:')), ']')), '[', ''));

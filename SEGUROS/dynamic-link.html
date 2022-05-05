@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta>
+    <meta>
+    <meta>
+</head>
+
+<body style="overflow-wrap: break-word;" onfocusout="parent.setEmailRange();">
+    <script>
+        var Xrm = parent.Xrm;
+        var guidactual = Xrm.Page.data.entity.getId();
+        var link = "";
+        Xrm.WebApi.online.retrieveMultipleRecords("axx_respuestasuscripcion", "?$select=axx_respuestasuscripcionid,axx_archivocotizacion&$filter=_axx_solicitudcotizacionid_value eq " + guidactual + "&$orderby=createdon desc").then(
+            function success(results) {
+                for (var i = 0; i < results.entities.length; i++) {
+                    let axx_archivocotizacion = results.entities[i]["axx_archivocotizacion"];
+                    let axx_respuestasuscripcionid = results.entities[i]["axx_respuestasuscripcionid"];
+                    if (axx_archivocotizacion) {
+                        link = Xrm.Page.context.getClientUrl() + "/api/data/v9.0/axx_respuestasuscripcions(" + axx_respuestasuscripcionid + ")/axx_archivocotizacion/$value";
+                        Xrm.WebApi.online.retrieveMultipleRecords("fileattachment", "?$select=filename&$filter=fileattachmentid eq " + axx_archivocotizacion).then(
+                            function success(results) {
+                                var filename = results.entities[0]["filename"];
+                                document.getElementById('linkId').text = filename;
+                            }
+                        );
+
+                        break;
+                    }
+                }
+                if (link != "") {
+                    document.getElementById('linkId').href = link;
+                } else {
+                    var control = Xrm.Page.ui.controls.get("WebResource_dynamic_link");
+                    control.setVisible(false);
+                }
+            },
+            function (error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+    </script>
+    <div style="font-family: undefined;">
+        <a href="#" id="linkId">Descargar Archivo</a>
+    </div>
+</body>
+
+</html>
