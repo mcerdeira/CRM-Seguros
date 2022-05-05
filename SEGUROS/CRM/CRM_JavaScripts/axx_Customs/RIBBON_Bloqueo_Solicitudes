@@ -1,0 +1,65 @@
+if (typeof (PSeg) == "undefined") {
+    PSeg = { __namespace: true };
+}
+
+PSeg.Ribbon = {
+    RIBBON_ReadOnly: function () {
+        if (Xrm.Page.getAttribute("statecode").getValue() == 0) { // Open
+            return PSeg.Solicitud.RIBBON_ReadOnly();
+        } else {
+            return false;
+        }
+    },
+
+    DerivarComercial: function (data) {
+        Xrm.Page.ui.clearFormNotification("1");
+        if (PSeg.Ribbon.AllMandadoryFieldsOk()) {
+            var id = data;
+            Xrm.Page.data.entity.save();
+            Xrm.Utility.showProgressIndicator("Procesando....");
+            if (id) {
+                if (Xrm.Page.getAttribute("axx_cotizada").getValue() == true) { Pnet.General.RunWorkFlow("8996B01A-2FA7-438E-95B1-CD1FD4EC056A", id, "Derivado Correctamente", true); }
+                else if (Xrm.Page.getAttribute("axx_cotizada").getValue() == false) { Pnet.General.RunWorkFlow("0DE639BC-C0D5-EB11-BACC-002248374EFA", id, "Derivado Correctamente", true); }
+            }
+        } else {
+            Xrm.Page.ui.setFormNotification("Debe completar los campos obligatorios previo a Derivar.", "WARNING", "1");
+        }
+    },
+
+    DerivarSuscripcion: function (data, formContext) {
+        debugger;
+        Xrm.Page.ui.clearFormNotification("1");
+        if (PSeg.Ribbon.AllMandadoryFieldsOk()) {
+            var id = data;
+            Xrm.Page.getAttribute("axx_cotizadacomercial").setValue(false);
+            formContext.data.save().then(
+                function () {
+                    Xrm.Utility.showProgressIndicator("Procesando....");
+                    if (id) {
+                        Pnet.General.RunWorkFlow("540891AE-DFB6-4B91-932F-0B6273B24C12", id, "Derivado Correctamente", true);
+                    }
+                }
+            );
+        } else {
+            Xrm.Page.ui.setFormNotification("Debe completar los campos obligatorios previo a Derivar.", "WARNING", "1");
+        }
+    },
+
+    AllMandadoryFieldsOk: function () {
+        var ok = true;
+        //debugger;
+        Xrm.Page.data.entity.attributes.forEach(function (attribute, index) {
+            var reqLevel = attribute.getRequiredLevel();
+            if (reqLevel == "required") {
+                var name = attribute.getName();
+                var isdisabled = Xrm.Page.getControl(name).getDisabled();
+                if (attribute.getValue() == null && !isdisabled) {
+                    ok = false;
+                }
+            }
+        });
+        return ok;
+    },
+
+    __namespace: true
+};

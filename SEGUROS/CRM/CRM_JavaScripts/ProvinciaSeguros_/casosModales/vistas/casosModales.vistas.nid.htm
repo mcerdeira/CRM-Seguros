@@ -1,0 +1,139 @@
+<html>
+    <head>
+            <meta charset="UTF-8">
+            
+            <link type="text/css" rel="stylesheet" href="../../css/plugins/bootstrap_4.1.3.css"/>
+            <link type="text/css" rel="stylesheet" href="../../css/plugins/bootstrap_vue_2.0.0.css"/>
+            <link type="text/css" rel="stylesheet" href="../../css/plugins/bootstrap_3.3.7.css">
+            <link type="text/css" rel="stylesheet" href="../css/casosModales.css">
+
+            <script src="../../js/plugins/jquery_3.3.1.js"></script>
+            <script src="../../js/plugins/vue_2.5.16.js"></script>
+            <script src="../../js/plugins/bootstrap_vue_2.0.0.js"></script>
+            <script src="../../js/plugins/bootstrap_3.3.7.js"></script>
+            <script src="../../js/plugins/knockout_3.4.2.js"></script>
+            <script src="../casosModales.js"></script>
+            <script src="../js/provinciaSeguros.casosModales.servicios.js"></script>
+            <script src="../modelos/casosModales.modelos.nid.js"></script>
+            <script src="../../posicionConsolidada/js/provinciaSeguros.posicionConsolidada.servicios.js"></script>
+    </head>    
+    <script>
+            $(document).ready(function(){
+
+                var parametersString = "";
+                var parameters = ""
+                ;
+                var getData = function (url) {
+
+                    var params = {};
+                    var parser = document.createElement('a');
+                    parser.href = url;
+                    var query = parser.search.substring(1);
+                    var vars = query.split('&');
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split('=');
+                        params[pair[0]] = decodeURIComponent(pair[1]);
+                    }
+                    parametersString = params;
+                };
+
+                var getParameters = function(getParams){
+	
+                    var params = {};
+                    var query = getParams.Data.substr(0);
+                    var vars = query.split('&');
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split('=');
+                        params[pair[0]] = decodeURIComponent(pair[1]);
+                    }
+                    parameters = params;
+                }
+
+                getData(window.location.href)
+                getParameters(parametersString);
+
+                provinciaSeguros.CasosModales.inicializarNid(
+                    parameters.aseguradoId
+                );
+            });
+        </script>
+    <body>
+        <div id="app">
+            <div class="loader-container" data-bind="visible: loaderVisible">
+                <img id="Loader" data-bind="attr: { src: loaderURL }" class="loader-img"/>
+            </div>    
+        <div data-bind="visible: contenidoVisible">
+            <div>
+                <br>
+                <span class="texto-fuente texto-boton"></span>    
+                <div class="seccion-titulo-div">                 
+                    <span class="seccion-titulo" align="center">NID</span>
+                    <br>
+                </div>   
+            </div>
+            <div id="NidsBody">
+                <div id="InformacionNids" class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th class="texto-fuente">Numero</th>
+                                <th class="texto-fuente">Ramo</th>
+                                <th class="texto-fuente">Numero Endoso</th>
+                                <th class="texto-fuente">Fecha Emision</th>
+                                <th class="texto-fuente">Cotizacion</th>
+                                <th class="texto-fuente">Estado</th>
+                                <th class="texto-fuente">Fecha Alta</th>
+                                <th class="texto-fuente">Area Destino</th>
+                                <th class="texto-fuente">Transaccion</th>
+                                <th class="texto-fuente">Poliza Asoc.</th>
+                                <th class="texto-fuente">Certificado</th>
+                                <th class="texto-fuente">Nombre Completo</th>
+                            </thead>
+                            <tbody data-bind="foreach: informacionNidsListaPaginada">
+                                <tr class="polizas-fila" data-bind="click: nidsBehaviour">
+                                    <td class="texto-fuente" data-bind="text: numero_nid"></td>
+                                    <td class="texto-fuente" data-bind="text: denominacion_ramo"></td>
+                                    <td class="texto-fuente" data-bind="text: numero_endoso"></td>
+                                    <td class="texto-fuente" data-bind="text: fecha_emision"></td>
+                                    <td class="texto-fuente" data-bind="text: numero_cotizacion"></td>
+                                    <td class="texto-fuente" data-bind="text: estado"></td>
+                                    <td class="texto-fuente" data-bind="text: fecha_alta"></td>
+                                    <td class="texto-fuente" data-bind="text: area_destino"></td>
+                                    <td class="texto-fuente" data-bind="text: transaccion"></td>
+                                    <td class="texto-fuente" data-bind="text: poliza_asociada"></td>
+                                    <td class="texto-fuente" data-bind="text: certificado"></td>
+                                    <td class="texto-fuente" data-bind="text: nombre_apellido"></td>
+                                </tr>
+                            </tbody>
+                        </table>                                    
+                    </div>
+                </div>
+                <center>
+                    <div id="Paginador">
+                        <ul class="pagination">
+                            <li class="page-item" data-bind="css: { disabled: informacionNidsPaginaActual() === 0 }">
+                                <a class="page-link" href="#" data-bind="click: informacionNidsPaginaAnterior" aria-label="Anterior">
+                                    <span aria-hidden="true" class="texto-fuente">&laquo;</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                            </li>
+                        </ul> 
+                        <ul class="pagination" data-bind="foreach: informacionNidsTodasLasPaginas">
+                            <li class="page-item" data-bind="css: { active: $data.numeroPagina === ($root.informacionNidsPaginaActual() + 1) }">
+                                <a class="page-link texto-fuente" href="#" data-bind="text: $data.numeroPagina, click: function() { $root.informacionNidsIrAPagina($data.numeroPagina-1); }"></a>
+                            </li>
+                        </ul>
+                        <ul class="pagination">
+                            <li class="page-item" data-bind="css: { disabled: informacionNidsPaginaActual() === informacionNidsMaximoPaginas() }">
+                                <a class="page-link" href="#" data-bind="click: informacionNidsPaginaSiguiente" aria-label="Siguiente">
+                                    <span aria-hidden="true" class="texto-fuente">&raquo;</span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </body>
+</html>

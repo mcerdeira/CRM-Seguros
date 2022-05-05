@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_4.1.3.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_vue_2.0.0.css"/>
+        <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_3.3.7.css">
+
+        <script src="../js/plugins/jquery_3.3.1.js"></script>
+        <script src="../js/plugins/vue_2.5.16.js"></script>
+        <script src="../js/plugins/bootstrap_vue_2.0.0.js"></script>
+        <script src="../js/plugins/bootstrap_3.3.7.js"></script>
+        <script src="../js/plugins/knockout_3.4.2.js"></script>
+        <script src="js/productores/provinciaSeguros.posicionConsolidadaProductores.js"></script>
+    </head>
+    <script>
+        $(document).ready(function(){
+            provinciaSeguros.posicionConsolidadaProductores.inicializar();
+        });
+    </script>  
+    <body>  
+        <div id="app" data-bind="visible: contenidoVisible">            
+            <!-- RAMOS -->
+            
+            <div id="Ramos" class="ramos-body" data-bind="visible: ramosVisible">
+                <!--<div>     
+                    <div class="seccion-titulo-div">
+                        <br>
+                        <span class="seccion-titulo" align="center">Ramos</span>
+                    </div>                   
+                    <p data-bind="text: riesgos" class="ramos-titulo-riesgos"></p>
+                </div>
+                <div class="row justify-content-left h-100" data-bind="foreach: informacionRamos">
+                    <div class="col-3 hidden-md-down">
+                        <b-card class="ramos-tarjeta" data-bind="click: ramosBehaviour">                    
+                            <b-card-img data-bind="attr: { src: imgUrl }"></b-card-img>
+                            <p class    ="card-text texto-fuente" data-bind="text:nombre_ramo" align="center"></p>
+                        </b-card>
+                    </div>
+                </div> -->
+            </div>
+            
+            <!-- FÍN RAMOS -->
+        </div> 
+    </body>
+</html>

@@ -1,0 +1,2 @@
+var PlaybookService;!function(e){var o=function(){function e(){}return e.getResourceString=function(o){var r=Xrm.Utility.getResourceString(e.WebResourceName,o);return void 0!==r&&null!==r||(r=o),r},e}();o.WebResourceName="Playbook/Localization/Languages/msdyn_Playbook",e.ResourceStringProvider=o}(PlaybookService||(PlaybookService={}));
+//# sourceMappingURL=G:\Agents\BA6581\_wap\102\s\target\retail\AnyCPU\PlaybookWebResources\MinifiedWebResources\Localization\msdyn_ResourceStringProvider.js.map

@@ -1,0 +1,41 @@
+function onFormRestrictEntity(executionContext) 
+{
+var formContext = executionContext.getFormContext();
+var lookupTO = formContext.getControl('regardingobjectid');
+
+if (lookupTO.getEntityTypes().length > 1) {
+lookupTO.setEntityTypes(['opportunity']);}
+
+formContext.getControl("regardingobjectid").setDefaultView("00000000-0000-0000-00AA-000010003006");
+
+}
+
+function setearReferente(executionContext) {
+   
+var formContext = executionContext.getFormContext();
+ 
+   // First get the cotiLookupId lookup
+   var cotiLookupId = formContext.getAttribute("axx_solicitudcotizacion").getValue();
+   var Id = cotiLookupId[0].id;
+   var Name = cotiLookupId[0].name;
+   var EntityType = cotiLookupId[0].entityType;
+    
+   // Create new lookup array
+    
+   var lookup = [];
+    lookup[0] = {};
+    lookup[0].id = Id;
+    lookup[0].entityType = EntityType;
+    lookup[0].name = Name;
+ 
+   // Get and Set New Lookup
+    var Referente = formContext.getAttribute("regardingobjectid");
+    Referente.setValue(lookup);
+    
+    formContext.data.entity.save();
+    
+    Xrm.Navigation.openForm({
+        entityName: "opportunity",
+		entityId: Id
+    });
+}

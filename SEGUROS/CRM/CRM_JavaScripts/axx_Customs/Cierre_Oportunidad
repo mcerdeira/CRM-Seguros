@@ -1,0 +1,42 @@
+if (typeof (PSeg) == "undefined") {
+    PSeg= { __namespace: true };
+}
+
+PSeg.CierreOportunidad = {
+    NotifId: "PSeg.CierreOportunidad",
+
+    OnLoad: function(executionContext){
+        var formContext = executionContext.getFormContext();
+        var opportunityid = formContext.getAttribute("opportunityid").getValue();
+            formContext.getControl("opportunitystatuscode").removeOption(5);
+        if(opportunityid){
+            PSeg.CierreOportunidad.RET_GetOpportunityData(formContext, opportunityid[0].id, PSeg.CierreOportunidad.HideCotizacion);
+        }
+        
+    },
+
+    HideCotizacion: function(formContext, axx_ramotexto){
+        if(axx_ramotexto.toUpperCase().trim() == "AUTOMOTOR"){
+            formContext.getControl("axx_nrocotizacion").setVisible(false);
+        } else {
+            formContext.getAttribute("axx_nrocotizacion").setRequiredLevel("required");
+        }
+    },
+
+    RET_GetOpportunityData: function(formContext, opportunityid, callBack){
+        Xrm.WebApi.online.retrieveRecord("opportunity", opportunityid, "?$select=_axx_ramo_value,axx_ramotexto").then(
+            function success(result) {
+                if(result){
+                    var axx_ramotexto = result["axx_ramotexto"];
+                    callBack(formContext, axx_ramotexto);
+                }
+            },
+            function(error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+    },
+
+    __namespace: true
+};
+

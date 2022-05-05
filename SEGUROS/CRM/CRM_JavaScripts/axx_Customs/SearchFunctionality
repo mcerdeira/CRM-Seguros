@@ -1,0 +1,96 @@
+if (typeof (PSeg) == "undefined") {
+    PSeg= { __namespace: true };
+}
+
+PSeg.SearchSales = {
+    OnLoad: function(executionContext) {
+        var formContext = executionContext.getFormContext(); 
+        formContext.getAttribute("axx_codigodeventa_text").setSubmitMode("always");
+        formContext.getAttribute("axx_unidaddenegocios").setSubmitMode("always");
+    },
+    
+    OnSave: function(executionContext) {
+        var formContext = executionContext.getFormContext(); 
+    
+    },
+
+    OnSearchChange: function(executionContext){
+        var formContext = executionContext.getFormContext(); 
+        var axx_search_field = formContext.getAttribute("axx_search_field").getValue();
+        if(axx_search_field){
+            PSeg.SearchSales.getSearchValues(executionContext, axx_search_field);
+        } else {
+            formContext.getAttribute("axx_unidaddenegocios").setValue(null);
+            formContext.getAttribute("axx_codigodeventa_text").setValue(null);
+        }
+    },
+
+    OnCodVentaSearchChange: function(executionContext){
+        var formContext = executionContext.getFormContext(); 
+        var axx_search_field = formContext.getAttribute("axx_codigodeventa").getValue();
+        if(axx_search_field){
+            PSeg.SearchSales.getSearchValuesLookUp(executionContext, axx_search_field[0].id);
+        } else {
+            formContext.getAttribute("axx_unidaddenegocios").setValue(null);
+            formContext.getAttribute("axx_codigodeventa_text").setValue(null);
+        }
+    },
+
+    getSearchValuesLookUp: function(executionContext, axx_search_field){
+        Xrm.WebApi.online.retrieveMultipleRecords("axx_codigosventa", `?$select=axx_coddeventa,axx_codigopostal,_axx_unidadnegocio_value&$filter=axx_codigosventaid eq ${axx_search_field}`).then(
+            function success(results) {
+                if(results && results.entities[0]){
+                    var formContext = executionContext.getFormContext(); 
+                    var axx_coddeventa = results.entities[0]["axx_coddeventa"];
+                    var axx_codigopostal = results.entities[0]["axx_codigopostal"];
+
+                    var lookupval = new Array();
+                    lookupval[0] = new Object();
+                    lookupval[0].id = results.entities[0]["_axx_unidadnegocio_value"];
+                    lookupval[0].name = results.entities[0]["_axx_unidadnegocio_value@OData.Community.Display.V1.FormattedValue"];
+                    lookupval[0].entityType = results.entities[0]["_axx_unidadnegocio_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                    if(lookupval[0].id != null){
+                        formContext.getAttribute("axx_unidaddenegocios").setValue(lookupval);
+                    } else {
+                        formContext.getAttribute("axx_unidaddenegocios").setValue(null);
+                    }
+                    formContext.getAttribute("axx_codigodeventa_text").setValue(axx_coddeventa);
+                    formContext.getAttribute("axx_codigopostal").setValue(axx_codigopostal);
+                }
+            },
+            function(error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+    },
+
+    getSearchValues: function(executionContext, axx_search_field){
+        Xrm.WebApi.online.retrieveMultipleRecords("axx_codigosventa", `?$select=axx_coddeventa,axx_codigopostal,_axx_unidadnegocio_value&$filter=axx_localidadcp eq '${axx_search_field}'`).then(
+            function success(results) {
+                if(results && results.entities[0]){
+                    var formContext = executionContext.getFormContext(); 
+                    var axx_coddeventa = results.entities[0]["axx_coddeventa"];
+                    var axx_codigopostal = results.entities[0]["axx_codigopostal"];
+
+                    var lookupval = new Array();
+                    lookupval[0] = new Object();
+                    lookupval[0].id = results.entities[0]["_axx_unidadnegocio_value"];
+                    lookupval[0].name = results.entities[0]["_axx_unidadnegocio_value@OData.Community.Display.V1.FormattedValue"];
+                    lookupval[0].entityType = results.entities[0]["_axx_unidadnegocio_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                    if(lookupval[0].id != null){
+                        formContext.getAttribute("axx_unidaddenegocios").setValue(lookupval);
+                    } else {
+                        formContext.getAttribute("axx_unidaddenegocios").setValue(null);
+                    }
+                    formContext.getAttribute("axx_codigodeventa_text").setValue(axx_coddeventa);
+                    formContext.getAttribute("axx_codigopostal").setValue(axx_codigopostal);
+                }
+            },
+            function(error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+    },
+
+    __namespace: true
+};

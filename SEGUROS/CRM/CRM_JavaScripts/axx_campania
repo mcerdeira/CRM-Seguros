@@ -1,0 +1,190 @@
+function refreshRoleupField(executionContext, entityName, entityId, rollup_fieldName)
+{
+
+ var formContext = executionContext.getFormContext();           
+ var clientUrl = formContext.context.getClientUrl();
+
+ // Method Calling and defining parameter
+ var rollupAPIMethod = "/api/data/v9.1/CalculateRollupField(Target=@tid,FieldName=@fn)";
+
+ // Passing Parameter Values
+rollupAPIMethod += "?@tid={'@odata.id':'campaigns("+ entityId +")'}&@fn='"+ rollup_fieldName +"'";
+
+ var req = new XMLHttpRequest();
+ req.open("GET", clientUrl + rollupAPIMethod, false);
+ req.onreadystatechange = function ()
+ {
+    if (this.readyState === 4) 
+    {
+        req.onreadystatechange = null;
+        if (this.status === 200) 
+        {
+          console.log("Field Recalculated successfully");
+        }
+    }
+ };
+
+ req.send();           
+ //formContext.data.entity.save();
+ formContext.data.entity.refresh();
+}
+
+ function onLoad(executionContext)
+{
+    var formContext = executionContext.getFormContext();           
+    var entityId = formContext.data.entity.getId().replace('{', '').replace('}', '');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_1intento');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_totalsegundointento');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_masdosintentos');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_cantidaddependientes');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_cantventasentrabajo');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_cantidaddeventaslogradas');
+    refreshRoleupField(executionContext, 'campaign', entityId, 'axx_cantidadvdtotal');
+    
+}
+
+function RunOnSelected(executionContext) {
+
+// Formulario Modal Nativo
+var selected = executionContext.getFormContext().data.entity;
+var Id = selected.getId();
+ 
+var pageInput = {
+pageType: "entityrecord",
+entityName: "axx_ventadirecta",
+entityId: Id
+};
+var navigationOptions = {
+target: 2,
+height: {value: 100, unit:"%"},
+width: {value: 100, unit:"%"},
+position: 1
+};
+Xrm.Navigation.navigateTo(pageInput, navigationOptions).then(
+    function (success) {
+        console.log(success);
+        parent.$("button[data-id='dialogResizeIconButton']", parent.document).hide();
+    },
+    function (error) {
+        console.log(error);
+    });
+}
+// Formulario Custom Web Resource
+
+function borraUActual(executionContext) 
+{
+    
+    setTimeout(function (){
+        var globalContext = Xrm.Utility.getGlobalContext();
+        var formContext = executionContext.getFormContext(); // get the form Context
+        var settings = globalContext.userSettings;
+        var usuarioId = settings.userId;
+        var usuarionombre = settings.userName;
+        var gridContext = formContext.getControl("Ventas"); // get the grid context
+        var myRows = gridContext.getGrid().getRows();
+        //var myRow = myRows.get("axx_usuarioactual");
+
+       //Inicio foreach
+        
+           myRows.forEach(function (row, i) {
+                var usuarioGrid = row.getData().getEntity().attributes.get("axx_usuarioactual").getValue()[0].name;
+                var idVd = row.getData().getEntity().attributes.get("axx_idvd").getValue();
+                    
+                if(usuarioGrid === usuarionombre)
+                {
+                 // Xrm.Utility.showProgressIndicator("Espere un segundo"); 
+                  // if (gridColumns != null){
+
+                    var req = new XMLHttpRequest();
+                    req.open("DELETE", globalContext.getClientUrl() + "/api/data/v9.1/axx_ventadirectas(axx_idvd='"+idVd+"')/axx_UsuarioActual/$ref", false);
+                    req.setRequestHeader("Accept", "application/json");
+                    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                    req.setRequestHeader("OData-MaxVersion", "4.0");
+                    req.setRequestHeader("OData-Version", "4.0");
+                    req.onreadystatechange = function() 
+                        {
+                            if (this.readyState === 4) 
+                           {
+                                req.onreadystatechange = null;
+                                if (this.status === 204 || this.status === 1223) {
+                                    //alert("ok");//Success - No Return Data - Do Something
+
+                    //           alert("El usuario "+usuarioGrid+" que trabajaba en el caso número Id numero:"+ idVd +
+                    //            "es igual al usuario logueado: "+ usuarionombre+ "por lo tanto debe liberar el registro.");
+                    //             formContext.data.entity.refresh();
+                    //            
+                                } else {
+                                    Xrm.Utility.alertDialog(this.statusText);
+                                }
+                            }
+                        };
+                    req.send();
+                    
+                    formContext.getControl("Ventas").refresh();
+                  //  formContext.getControl("Revisar").refresh();
+                  //  Xrm.Utility.closeProgressIndicator();
+                }
+           });//end of foreach
+           
+           
+           
+    }, 2000);
+
+}
+
+function usuarioPermiso(executionContext)
+{
+var formContext = executionContext.getFormContext();
+var currentUserRoles = Xrm.Utility.getGlobalContext().userSettings.roles.getAll();
+var AgenteVD = "PS - Rol Agente Venta Directa"
+    for (var i = 0; i < currentUserRoles.length; i++) {
+        var userRoleName = currentUserRoles[i].name;
+        if (userRoleName == AgenteVD) {
+            formContext.getControl("name").setDisabled(true);
+            formContext.getControl("typecode").setDisabled(true);
+            formContext.getControl("statuscode").setDisabled(true);
+        }
+    }
+}
+//function usuarioPermiso(executionContext)
+//{
+//        var globalContext = Xrm.Utility.getGlobalContext();
+//        var formContext = executionContext.getFormContext(); // get the form Context
+//        var settings = globalContext.userSettings;
+//        var usuarioId = settings.userId;
+//        var usuarionombre = settings.userName;
+//        var rolesUsuario = settings.roles.getAll();
+//        var x;
+//       
+//    var AgenteVD = "8cf2a9da-27ae-4ff1-bfbe-fd7374242f20";
+//    var AgenteName = "PS - Rol Agente Venta Directa"
+//    var JefeVD = "cea3b285-6ae0-e911-a812-000d3ac17e18";
+//    var admin = "13ccce49-6966-e811-a84b-000d3ac0b098";
+//    alert(rolesUsuario)
+////        for (x of rolesUsuario){
+////           if (x == AgenteName){
+////            formContext.getControl("name").setDisabled(true);
+////            formContext.getControl("typecode").setDisabled(true);
+////            formContext.getControl("statuscode").setDisabled(true);
+////            }
+////        }
+//
+//}
+
+//usuarioPermiso = function () {
+//    var roles = Xrm.Utility.getGlobalContext().userSettings.roles;
+// 
+//    if (roles === null) return false;
+// 
+//    var hasRole = false;
+//    roles.forEach(function (item) {
+//        if (item.name.toLowerCase() === "PS - Rol Operador Venta Directa") {
+//            hasRole = true;
+//            formContext.getControl("name").setDisabled(true);
+//            formContext.getControl("typecode").setDisabled(true);
+//            formContext.getControl("statuscode").setDisabled(true);            
+//        }
+//    });
+// 
+//    return hasRole;
+//}

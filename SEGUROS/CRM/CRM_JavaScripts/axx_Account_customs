@@ -1,0 +1,13 @@
+function Account_SetFlagFalse(executionContext){
+    var formContext = executionContext.getFormContext(); 
+    var axx_cancelarector= formContext.getAttribute("axx_cancelarector").getValue();
+    formContext.getAttribute("axx_cancelarector").setSubmitMode("always");
+    if(axx_cancelarector){
+        formContext.getAttribute("axx_cancelarector").setValue(false);
+    }
+}
+
+function Account_Onload(executionContext){
+    var formContext = executionContext.getFormContext(); 
+    formContext.getAttribute("axx_cancelarector").setSubmitMode("always");
+}

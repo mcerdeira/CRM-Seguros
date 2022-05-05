@@ -1,0 +1,194 @@
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
+using ProvinciaSeguros.Plugins.Constantes;
+using ProvinciaSeguros.Plugins.Dominio;
+using ProvinciaSeguros.Plugins.Excepciones;
+using ProvinciaSeguros.Plugins.Fabricas;
+using ProvinciaSeguros.Plugins.Interfaces;
+using ProvinciaSeguros.Plugins.Servicios;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProvinciaSeguros.Plugins
+{
+    public class ActualizacionPersonasPlugin : IPlugin
+    {
+        #region - Atributos Privados -
+
+        private readonly string _messageCreate = "CREATE";
+        private readonly string _messageUpdate = "UPDATE";
+
+        IServicioRector _servicioRector;
+        ITracingService _tracingService;
+        IPluginExecutionContext _context;
+        IOrganizationService _organizationService;
+        IOrganizationServiceFactory _serviceFactory;
+        IServicioCRM _servicioCRM;
+        IServicioExcepciones _servicioExcepciones;
+        IServicioValidaciones _servicioValidaciones;
+
+        Fabrica _fabrica;
+
+        #endregion - Atributos Privados -
+
+        #region - Métodos Públicos -
+
+        public void Execute(IServiceProvider serviceProvider)
+        {
+            RectorDTO dto = new RectorDTO();
+            string json = "";
+            bool ExisteRector = false;
+
+            try
+            {
+                InicializarServicios(serviceProvider);
+
+                if (_context.InputParameters.Contains("Target") && _context.InputParameters["Target"] is Entity)
+                {
+                    var entidadCRM = _context.InputParameters["Target"] as Entity;
+                    Entity persona = new Entity();
+
+                    if (entidadCRM.LogicalName.Equals(CamposPersona.ENT_PERSONA))
+                    {
+<<<<<<< HEAD
+                        // CREATE
+                        if (_context.MessageName.ToUpper().Equals(_messageCreate))
+                        {
+                            // Guardo en CRM.
+                            persona = _servicioCRM.AltaPersona(entidadCRM);
+
+                            if ((entidadCRM.Contains(CamposPersona.NOMBRE)) ||
+                                (entidadCRM.Contains(CamposPersona.APELLIDO)) ||
+                                (entidadCRM.Contains(CamposPersona.NUMERO_DOCUMENTO))) {
+
+                                // Si la persona ya existe en RECTOR se agrega un flag de existe.
+                                if (_servicioRector.ExistePersona(persona.Attributes[CamposPersona.NOMBRE].ToString(),
+                                                                   persona.Attributes[CamposPersona.APELLIDO].ToString(),
+                                                                   persona.Attributes[CamposPersona.NUMERO_DOCUMENTO].ToString()))
+                                {
+                                    ExisteRector = true;
+                                    // throw new NegocioException("La persona ingresada ya existe en RECTOR.");
+                                }
+                            }
+                        }
+                        // UPDATE
+                        else if (_context.MessageName.ToUpper().Equals(_messageUpdate))
+=======
+                        var userMail = _servicioCRM.GetUserName(_context.InitiatingUserId);
+
+                        // Chequeo que el usuario no sea el usuario d e servicios.
+                        if (!userMail.Contains("dynamics"))
+>>>>>>> 5e52ea7d39b5f0225da5ad69fe763373edacb540
+                        {
+                            // CREATE
+                            if (_context.MessageName.ToUpper().Equals(_messageCreate))
+                            {
+                                // Guardo en CRM.
+                                persona = _servicioCRM.AltaPersona(entidadCRM);
+
+                                if ((entidadCRM.Contains(CamposPersona.NOMBRE)) ||
+                                    (entidadCRM.Contains(CamposPersona.APELLIDO)) ||
+                                    (entidadCRM.Contains(CamposPersona.NUMERO_DOCUMENTO)))
+                                {
+
+                                    // Si la persona ya existe en RECTOR no se tiene que poder hacer el Alta.
+                                    if (_servicioRector.ExistePersona(persona.Attributes[CamposPersona.NOMBRE].ToString(),
+                                                                       persona.Attributes[CamposPersona.APELLIDO].ToString(),
+                                                                       persona.Attributes[CamposPersona.NUMERO_DOCUMENTO].ToString())) throw new NegocioException("La persona ingresada ya existe en RECTOR.");
+                                }
+                            }
+                            // UPDATE
+                            else if (_context.MessageName.ToUpper().Equals(_messageUpdate))
+                            {
+                                // Pre imagen del cambio
+                                if (_context.PreEntityImages.Contains("PersonasPreImagen") && _context.PreEntityImages["PersonasPreImagen"] is Entity)
+                                {
+
+                                    Entity preImagen = (Entity)_context.PreEntityImages["PersonasPreImagen"];
+
+                                    persona = _servicioCRM.ModificacionPersona(entidadCRM, preImagen);
+
+                                }
+                            }
+
+<<<<<<< HEAD
+                        // Hago el mapeo de campos con la entidad que va a viajar a RECTOR.
+                        // Agrego el flag si en rector existe la persona
+                        if(ExisteRector)
+                            persona.Attributes.Add("ExisteRector", ExisteRector);
+
+                        var personaRector = _fabrica.Fabricar(persona);
+
+                        // Remuevo el flag de la entidad CRM para que no rompa
+                        if (ExisteRector)
+                            persona.Attributes.Remove("ExisteRector");
+
+                        json = ServicioRector.To<PersonaRector>((PersonaRector)personaRector);
+                        _tracingService.Trace((personaRector as PersonaRector).axx_fechanacimiento);
+                        _servicioValidaciones.ValidarPersona(personaRector as PersonaRector);
+=======
+                            // Hago el mapeo de campos con la entidad que va a viajar a RECTOR.
+                            var personaRector = _fabrica.Fabricar(persona);
+
+                            json = ServicioRector.To<PersonaRector>((PersonaRector)personaRector);
+                            _tracingService.Trace((personaRector as PersonaRector).axx_fechanacimiento);
+                            _servicioValidaciones.ValidarPersona(personaRector as PersonaRector);
+>>>>>>> 5e52ea7d39b5f0225da5ad69fe763373edacb540
+
+                            if (_context.MessageName.ToUpper().Equals(_messageCreate))
+                            {
+                                dto = _servicioRector.AltaPersona(personaRector);
+                            }
+                            else
+                                dto = _servicioRector.ActualizacionPersona(personaRector);
+
+                            if (dto.status_code.Equals(RectorConstants.STATUS_OK))
+                            {
+                                persona.Attributes[CamposPersona.IDRECTOR] = dto.id_rector;
+                            }
+
+                            else throw new Exception(dto.mensaje_error);
+
+                            _tracingService.Trace("id_rector: " + dto.id_rector);
+                        }
+                        else _tracingService.Trace("Dado de alta por Dynamics CRM WebAPI: " + entidadCRM.Id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _servicioExcepciones.Atender(ex,json,dto);
+            }
+        }
+
+        #endregion - Métodos Públicos -
+
+        #region - Métodos Privados -
+
+        private void InicializarServicios(IServiceProvider serviceProvider)
+        {
+            _tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+            _context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+            _serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+            _organizationService = _serviceFactory.CreateOrganizationService(_context.UserId);
+
+            _fabrica = new FabricaPersonas();
+            _servicioCRM = new ServicioCRM(_organizationService);
+            _servicioRector = new ServicioRector(_servicioCRM);
+            _servicioExcepciones = new ServicioExcepciones(_tracingService);
+            _servicioValidaciones = new ServicioValidaciones();
+
+            if (_servicioRector == null) throw new ArgumentNullException("Servicio rector es nulo");
+            if (_tracingService == null) throw new ArgumentNullException("_tracingService es nulo");
+            if (_context == null) throw new ArgumentNullException("_context es nulo");
+            if (_serviceFactory == null) throw new ArgumentNullException("_serviceFactory es nulo");
+            if (_organizationService == null) throw new ArgumentNullException("_service es nulo");
+            if (_servicioValidaciones == null) throw new ArgumentNullException("_servicioValidaciones es nulo");
+        }
+
+        #endregion - Métodos Privados -
+    }
+}

@@ -1,0 +1,21 @@
+<html><head><meta><meta><meta><meta><meta><meta><meta><meta><meta><meta></head><body onfocusout="parent.setEmailRange();" style="overflow-wrap: break-word;"> 
+<script src="./ProvinciaSeguros_/oportunidades/axx_formularioOportunidades.js" type="text/javascript"></script>
+<style>
+button {
+  background-color:rgb(20, 94, 160);
+}
+button:hover {
+  background-color: rgb(80, 127, 168);
+}
+</style>
+<script>
+    function clicked(){
+        debugger;
+        var Xrm = parent.Xrm;
+        Xrm.Page.getAttribute("axx_botoncontinuardummy").fireOnChange();
+    }
+</script>
+<button onclick="clicked()" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; font-size: 14px; font-style: normal; color:rgb(255,255,255); 
+font-family: 'Segoe UI'; width:auto; border-color: transparent;
+height: 2.0rem; padding-left: 1rem; padding-right: 1rem;">
+<span>Continuar</span></button></body></html>

@@ -1,0 +1,18 @@
+function obtenerUrlCaso (executionContext){
+
+var globalContext = Xrm.Utility.getGlobalContext();
+var AppID =globalContext.getCurrentAppUrl();
+var formContext = executionContext.getFormContext();
+//var orgURL = formContext.context.getClientUrl();;
+var recordId = formContext.data.entity.getId().replace("{", "").replace("}", "");
+var entityName = formContext.data.entity.getEntityName();
+
+//Get the object type code dynamically following the above url
+var objectTypeCode = 1; //for account entity
+
+var recordURL = AppID + "&pagetype=entityrecord&etn=" + entityName + "&id=" + recordId;
+
+formContext.getAttribute("ps_urldelcaso").setValue(recordURL)
+
+//alert (recordURL);
+}

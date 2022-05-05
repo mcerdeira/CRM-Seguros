@@ -1,0 +1,82 @@
+if (typeof (PSeg) == "undefined") {
+    PSeg= { __namespace: true };
+}
+
+PSeg.Solicitud = {
+    statuscodes: {Derivar_suscripcion: 282270003},
+    NotifId: "PSeg.Solicitud",
+    ReadOnly: false,
+    EnableComercialButton: true,
+
+    OnLoad: function(executionContext){
+        var formContext = executionContext.getFormContext();
+        formContext.ui.clearFormNotification(PSeg.Solicitud.NotifId);
+        var status = formContext.getAttribute("statuscode").getValue()
+        if(status == this.statuscodes.Derivar_suscripcion){
+            this._REST_ReadOnlyForm(executionContext);
+        }
+    },
+
+    RIBBON_ReadOnly: function(){
+        if(PSeg.Solicitud.ReadOnly){
+            var currentUserRoles = Xrm.Utility.getGlobalContext().userSettings.roles.getAll();
+            PSeg.Solicitud.EnableComercialButton = false; 
+            for (var i = 0; i < currentUserRoles.length; i++) {
+                var userRoleName = currentUserRoles[i].name;
+                if (userRoleName == Pnet.General.RolesStrings.Rol_Suscriptor) {
+                    PSeg.Solicitud.EnableComercialButton = true;
+                }
+            }
+        } else {
+            PSeg.Solicitud.EnableComercialButton = true;
+        }
+        return PSeg.Solicitud.EnableComercialButton;
+    },
+
+    _ReadOnlyForm: function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        var controls = formContext.data.entity.attributes.getAll();
+        //formContext.ui.setFormNotification("Se ha derivado la Cotización a Suscripción. Formulario solo lectura.", "WARNING", PSeg.Solicitud.NotifId);
+        for (var i = 0; i < controls.length; i++) {
+            var name = controls[i].getName();
+            if (name != "axx_archivo" && name != "axx_comentariosjefatura") {
+                var ctrl = formContext.getControl(name);
+                if (ctrl && ctrl.setDisabled) {
+                    ctrl.setDisabled(true);
+                    PSeg.Solicitud.setDisabledAllControls(name, true);
+                }
+            }
+        }
+    },
+
+    setDisabledAllControls: function(attribName, value) {
+        var attr = Xrm.Page.getAttribute(attribName);
+        attr.controls.forEach(function(control) {
+            control.setDisabled(value);
+        });
+    },
+
+    _REST_ReadOnlyForm: function (executionContext) {
+        var currentUserRoles = Xrm.Utility.getGlobalContext().userSettings.roles.getAll();
+        var readOnly = false;
+        for (var i = 0; i < currentUserRoles.length; i++) {
+            var userRoleName = currentUserRoles[i].name;
+            if (userRoleName == Pnet.General.RolesStrings.Rol_Comercial) {
+                readOnly = true;
+                break;
+            }
+            else if (userRoleName == Pnet.General.RolesStrings.Rol_Administrador){
+            readOnly = false;
+            break;
+            }
+        }
+        if(readOnly){
+            PSeg.Solicitud._ReadOnlyForm(executionContext);
+            var formContext = executionContext.getFormContext();
+            formContext.ui.refreshRibbon(false);
+        }
+        PSeg.Solicitud.ReadOnly = readOnly;
+    },
+
+    __namespace: true
+};

@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "037a1dde-f0ee-4307-a6df-e307bb370602",
+		"name": "Venta Directa - BOT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WhoAmI",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientId",
+							"value": "{{clientid}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{authurl}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{callback}}",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "implicit",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Postmantest01",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "d"
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientId",
+							"value": "{{clientid}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{authurl}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{callback}}",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "implicit",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Postmantest01",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"{\\\"createdon\\\":\\\"2021-05-27T00:30:00.000Z\\\",\\\"axx_cotizacion\\\":\\\"64,905,656\\\",\\\"axx_marca\\\":\\\"VWV\\\",\\\"axx_modelo\\\":\\\"046631\\\",\\\"axx_anofabricacion\\\":\\\"2017\\\",\\\"axx_0km\\\":\\\"N\\\",\\\"axx_codigopostal\\\":\\\"1407\\\",\\\"axx_telefono\\\":\\\"5491136811341\\\",\\\"axx_nombre\\\":\\\"Martin\\\",\\\"axx_apellido\\\":\\\"Cerdeira\\\",\\\"axx_documento\\\":\\\"29444693\\\",\\\"axx_canal\\\":282270000}\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{webapiurl}}/axx_ventadirectas",
+					"host": [
+						"{{webapiurl}}"
+					],
+					"path": [
+						"axx_ventadirectas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

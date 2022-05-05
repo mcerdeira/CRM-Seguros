@@ -1,0 +1,5 @@
+function ocultarBotonVDNuevo(primaryControl)
+{
+	var formContext = primaryControl;
+	return (formContext.getAttribute("typecode").getText() == "Referidos");
+}

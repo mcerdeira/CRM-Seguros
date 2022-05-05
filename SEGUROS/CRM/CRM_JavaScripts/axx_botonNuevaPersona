@@ -1,0 +1,9 @@
+<html><head>
+            <meta charset="UTF-8">
+ 
+            <script src="../ProvinciaSeguros_/oportunidades/axx_formularioOportunidades.js"></script>
+<meta><meta></head>
+<body>
+<button onclick="nuevaPersona">Nueva Persona</button>
+
+</body></html>

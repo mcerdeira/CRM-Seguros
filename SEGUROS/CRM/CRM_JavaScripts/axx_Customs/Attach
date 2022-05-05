@@ -1,0 +1,22 @@
+<html><head>
+    <script src="Attach_js.js" type="text/javascript"></script>
+<meta></head>
+<body style="overflow-wrap: break-word;">
+    <script>
+        var Xrm = parent.Xrm;
+        var field = location.search.split("=")[1];
+        if(Xrm.Page.ui.getFormType() == 1){
+            // Si es modo CREATE, se oculta el campo real de upload para que se vea unicamente el upload del webresource
+            Xrm.Page.getControl(field).setVisible(false);
+            Xrm.Page.data.entity.addOnPostSave(function(){uploadFile(field)});
+        } else {
+            // Si el modo es otro, se oculta este web resource
+            var control = Xrm.Page.ui.controls.get("WebResource_" + field);
+            control.setVisible(false);
+        }
+    </script>
+    <div style="font-family: undefined;">
+        <input type="file" id="myFile">
+    </div>
+
+</body></html>

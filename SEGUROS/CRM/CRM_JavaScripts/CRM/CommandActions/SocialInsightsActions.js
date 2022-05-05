@@ -1,0 +1,2 @@
+var SocialInsightsActions;!function(t){"use strict";var a=function(){function t(){}return t}();a.DialogParamLastButtonClicked="param_lastButtonClicked",a.closeDialog=function(t){var i=t.getFormContext(),o=t.getEventSource().getName(),n=i.data.attributes.get(a.DialogParamLastButtonClicked);n&&n.setValue(o),i.ui.close()},t.DialogActions=a}(SocialInsightsActions||(SocialInsightsActions={}));
+//# sourceMappingURL=D:\a\1\s\target\retail\AnyCPU\CrmClientCommon\MinifiedWebResources\CommandActions\SocialInsightsActions.js.map

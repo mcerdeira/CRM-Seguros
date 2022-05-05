@@ -1,0 +1,780 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_4.1.3.css" />
+    <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_vue_2.0.0.css" />
+    <link type="text/css" rel="stylesheet" href="../css/plugins/bootstrap_3.3.7.css">
+    <link type="text/css" rel="stylesheet" href="css/posicionConsolidada.css">
+
+    <script src="../js/plugins/jquery_3.3.1.js"></script>
+    <script src="../js/plugins/vue_2.5.16.js"></script>
+    <script src="../js/plugins/bootstrap_vue_2.0.0.js"></script>
+    <script src="../js/plugins/bootstrap_3.3.7.js"></script>
+    <script src="../js/plugins/knockout_3.4.2.js"></script>
+    <script src="js/provinciaSeguros.posicionConsolidada.js"></script>
+    <script src="js/provinciaSeguros.posicionConsolidada.servicios.js"></script>
+    <script src="js/provinciaSeguros.posicionConsolidada.modelo.js"></script>
+    <script src="js/siniestros/provinciaSeguros.posicionConsolidada.siniestros.servicios.js"></script>
+    <script src="js/siniestros/provinciaSeguros.posicionConsolidada.siniestros.modelo.js"></script>
+    <script src="js/cobranzas/provinciaSeguros.posicionConsolidada.Cobranzas.servicios.js"></script>
+    <script src="js/cobranzas/provinciaSeguros.posicionConsolidada.Cobranzas.modelo.js"></script>
+    <script src="../js/Util.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            provinciaSeguros.posicionConsolidada.inicializar();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="loader-container" data-bind="visible: loaderVisible">
+        <img id="Loader" data-bind="attr: { src: loaderURL }" class="loader-img" />
+    </div>
+    <div id="app" data-bind="visible: contenidoVisible">
+        <ul id="TabsHeader" class="nav nav-pills">
+            <li class="nav-item active">
+                <a data-toggle="tab" class="nav-link tabs-titulo" href="#Polizas">Polizas</a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="tab" class="nav-link tabs-titulo" href="#Siniestros">Siniestros</a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="tab" class="nav-link tabs-titulo" href="#Cobranzas">Cobranzas</a>
+            </li>
+        </ul>
+        <div id="TabsContent" class="tab-content">
+
+            <div id="Polizas" class="tab-pane fade in active">
+
+                <!-- RAMOS -->
+
+                <div id="Ramos" class="ramos-body" data-bind="visible: ramosVisible">
+                    <div>
+                        <div class="seccion-titulo-div">
+                            <span class="seccion-titulo" align="center">Ramos</span>
+                        </div>
+                        <p data-bind="text: riesgos" class="ramos-titulo-riesgos"></p>
+                    </div>
+                    <!--Only part where materialize is used-->
+                    <div data-bind="visible: mensajeSinPolizasVisible">
+                        <center><span class="texto-fuente">La persona no tiene pólizas.</span></center>
+                    </div>
+                    <div class="row justify-content-left" data-bind="foreach: informacionRamos">
+                        <div class="col-3 hidden-md-down">
+                            <b-card class="ramos-tarjeta" data-bind="click: ramosBehaviour">
+                                <!--                                    <b-card-img data-bind="attr: { src: imgUrl }"></b-card-img>-->
+                                <center>
+                                    <img class="col-12" data-bind="attr: { src: imgUrl }"></img>
+                                </center>
+                                <div class="texto-carta-div">
+                                    <p class="card-text texto-carta" data-bind="text:nombre_ramo" align="center"></p>
+                                </div>
+                            </b-card>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FÍN RAMOS -->
+
+                <!-- PÓLIZAS -->
+
+                <div id="Polizas" data-bind="visible: polizasVisible">
+                    <span class="boton-volver" data-bind="click: mostrarRamos">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Polizas</span>
+                    </div>
+                    <div id="PolizasBody">
+                        <div id="InformacionPolizas" class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Poliza</th>
+                                            <th class="texto-fuente">Premio "$"</th>
+                                            <th class="texto-fuente">Ramo</th>
+                                            <th class="texto-fuente">Desde</th>
+                                            <th class="texto-fuente">Hasta</th>
+                                            <th class="texto-fuente">Forma de Pago</th>
+                                            <th class="texto-fuente">Estado</th>
+                                            <th class="texto-fuente">Certificados</th>
+                                            <th class="texto-fuente">Patente / Matrícula</th>
+                                            <th class="texto-fuente">Siguiente</th>
+                                            <th class="texto-fuente">Certificado</th>
+                                            <th class="texto-fuente">Anterior</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionPolizasListaPaginada">
+                                        <tr class="polizas-fila" data-bind="click: polizaBehaviour">
+                                            <td class="texto-fuente" data-bind="text: numero_poliza"></td>
+                                            <td class="texto-fuente" data-bind="text: premio"></td>
+                                            <td class="texto-fuente" data-bind="text: ramo"></td>
+                                            <td class="texto-fuente" data-bind="text: desde"></td>
+                                            <td class="texto-fuente" data-bind="text: hasta"></td>
+                                            <td class="texto-fuente" data-bind="text: forma_pago"></td>
+                                            <td class="texto-fuente" data-bind="text: estado"></td>
+                                            <td class="texto-fuente" data-bind="text: cantidad_certificados"></td>
+                                            <td class="texto-fuente" data-bind="text: identificacion_riesgo"></td>
+                                            <td class="texto-fuente" data-bind="text: id_siguiente"></td>
+                                            <td class="texto-fuente" data-bind="text: numero_certificado"></td>
+                                            <td class="texto-fuente" data-bind="text: id_anterior"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <center>
+                            <div id="Paginador">
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        data-bind="css: { disabled: informacionPolizasPaginaActual() === 0 }">
+                                        <a class="page-link" href="#"
+                                            data-bind="click: informacionCertificadosPaginaAnterior"
+                                            aria-label="Anterior">
+                                            <span aria-hidden="true" class="texto-fuente">&laquo;</span>
+                                            <span class="sr-only">Anterior</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="pagination" data-bind="foreach: informacionPolizasTodasLasPaginas">
+                                    <li class="page-item"
+                                        data-bind="css: { active: $data.numeroPagina === ($root.informacionPolizasPaginaActual() + 1) }">
+                                        <a class="page-link texto-fuente" href="#"
+                                            data-bind="text: $data.numeroPagina, click: function() { $root.informacionPolizasIrAPagina($data.numeroPagina-1); }"></a>
+                                    </li>
+                                </ul>
+                                <ul class="pagination">
+                                    <li class="page-item"
+                                        data-bind="css: { disabled: informacionPolizasPaginaActual() === informacionPolizasMaximoPaginas() }">
+                                        <a class="page-link" href="#"
+                                            data-bind="click: informacionCertificadosPaginaSiguiente"
+                                            aria-label="Siguiente">
+                                            <span aria-hidden="true" class="texto-fuente">&raquo;</span>
+                                            <span class="sr-only">Siguiente</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+
+                <!--FÍN PÓLIZAS -->
+
+                <!--DETALLES DE POLIZAS -->
+
+                <div id="DetallesPolizas" class="ramos-body" data-bind="visible: detallesPolizaVisible">
+                    <span class="boton-volver" data-bind="click: volverPolizas">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Detalle de Polizas</span>
+                    </div>
+                    <div class="detallesPoliza-botones-div">
+                        <span class="detallesPoliza-botones" data-bind="click: llamarPolizaAnterior"><img
+                                data-bind="attr: { src: anteriorPolizaURL }, visible: botonPolizaAnteriorVisible"></span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="detallesPoliza-botones" data-bind="click: llamarPolizaSiguiente"><img
+                                data-bind="attr: { src: siguientePolizaURL }, visible: botonPolizaSiguienteVisible"></span>
+                    </div>
+                    <div id="DetallesPolizaBody">
+                        <div id="InformacionGeneralDetallesPoliza">
+                            <h2 class="seccion-subtitulo">Información General</h2>
+                            <span class="texto-fuente">Numero de Poliza: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: numeroPoliza"></span>
+                            <br>
+                            <span class="texto-fuente">Premio: </span>
+
+                            <span class="detallePolizas-detalleDato" data-bind="text: premio"></span>
+                            <br>
+                            <span class="texto-fuente">Prima: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: prima"></span>
+                            <br>
+                            <span class="texto-fuente">Deuda exigible: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: deudaExigible"></span>
+                            <br>
+                            <span class="texto-fuente">Vigencia de facturacion desde: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: desdeRefacturacion"></span>
+                            <br>
+                            <span class="texto-fuente">Vigencia de facturacion hasta: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: hastaRefacturacion"></span>
+                            <br>
+                            <span class="texto-fuente">Vigencia tecnica desde: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: desdeTecnica"></span>
+                            <br>
+                            <span class="texto-fuente">Vigencia tecnica hasta: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: hastaTecnica"></span>
+                            <br>
+                            <span class="texto-fuente">Forma de pago: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: formaPago"></span>
+                            <br>
+                            <span class="texto-fuente">Número de tarjeta: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: numeroTarjeta"></span>
+                            <br>
+                            <span class="texto-fuente">Vencimiento de tarjeta: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: vencimientoTarjeta"></span>
+                            <br>
+                            <span class="texto-fuente">Banco emisor: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: bancoEmisor"></span>
+                            <br>
+                            <span class="texto-fuente">CBU: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: cbu"></span>
+                            <br>
+                            <span class="texto-fuente">Productor asociado: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: productorAsociado"></span>
+                            <br>
+                            <span class="texto-fuente">Número de productor asociado: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: numeroProductorAsociado"></span>
+                            <br>
+                            <span class="texto-fuente">Promoción: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: promocion"></span>
+                            <br>
+                            <span class="texto-fuente">Plazo de rendición de pagos: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: esquemaPago"></span>
+                            <br>
+                            <span class="texto-fuente">Tiene acreedor: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: tieneAcreedor"></span>
+                            <br>
+                            <span class="texto-fuente">Es tomador: </span>
+                            <span class="detallePolizas-detalleDato" data-bind="text: esTomador"></span>
+                        </div>
+                        <br>
+                        <div id="CertificadosDetallesPoliza">
+                            <h2 class="seccion-subtitulo">Certificados</h2>
+                            <br>
+                            <div id="BusquedaCertificadosDetallesPoliza">
+                                <div class="input-group detallesPoliza-buscador">
+                                    <input class="form-control" id="criterioBusquedaCertificado" type="text"
+                                        placeholder="Criterio..." aria-label="Criterio...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-default btn-outline-secondary" type="button"
+                                            data-bind="click: buscarCertificados"><img
+                                                src="https://png.icons8.com/material/20/000000/profit-analysis.png"
+                                                alt=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div id="TablaCertificadosDetallesPoliza" class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="texto-fuente">Numero</th>
+                                                <th class="texto-fuente">Plan</th>
+                                                <th class="texto-fuente">Riesgo</th>
+                                                <th class="texto-fuente">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: informacionCertificados">
+                                            <tr class="polizas-fila" data-bind="click: certificadoBehaviour">
+                                                <td class="texto-fuente" data-bind="text: numero_certificado"></td>
+                                                <td class="texto-fuente" data-bind="text: plan"></td>
+                                                <td class="texto-fuente" data-bind="text: riesgo"></td>
+                                                <td class="texto-fuente" data-bind="text: estado"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <center>
+                            <!--                            <div id="Paginador">
+                                <ul class="pagination">
+                                    <li class="page-item" data-bind="css: { disabled: informacionCertPaginaActual() === 0 }">
+                                        <a class="page-link" href="#" data-bind="click: informacionCertPaginaAnterior" aria-label="Anterior">
+                                            <span aria-hidden="true" class="texto-fuente">&laquo;</span>
+                                            <span class="sr-only">Anterior</span>
+                                        </a>
+                                    </li>
+                                </ul> 
+                                <ul class="pagination" data-bind="foreach: informacionCertTodasLasPaginas">
+                                    <li class="page-item" data-bind="css: { active: $data.numeroPagina === ($root.informacionCertPaginaActual() + 1) }">
+                                        <a class="page-link texto-fuente" href="#" data-bind="text: $data.numeroPagina, click: function() { $root.informacionCertIrAPagina($data.numeroPagina-1); }"></a>
+                                    </li>
+                                </ul>
+                                <ul class="pagination">
+                                    <li class="page-item" data-bind="css: { disabled: informacionCertPaginaActual() === informacionCertMaximoPaginas() }">
+                                        <a class="page-link" href="#" data-bind="click: informacionCertPaginaSiguiente" aria-label="Siguiente">
+                                            <span aria-hidden="true" class="texto-fuente">&raquo;</span>
+                                            <span class="sr-only">Siguiente</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> 
+-->
+                        </center>
+                    </div>
+                </div>
+
+
+                <!-- FÍN DETALLES DE POLIZAS -->
+
+                <!--COBERTURAS -->
+
+                <div id="Coberturas" data-bind="visible: coberturaVisible">
+                    <span class="boton-volver" data-bind="click: volerDetallepolizas">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Coberturas</span>
+                    </div>
+                    <div>
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Detalle</th>
+                                            <th class="texto-fuente">Suma $</th>
+                                            <th class="texto-fuente">Adicionales</th>
+                                            <th class="texto-fuente">Suma $</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionCoberturas">
+                                        <tr>
+                                            <td class="texto-fuente" data-bind="text: detalle"></td>
+                                            <td class="texto-fuente" data-bind="text: suma_cobertura"></td>
+                                            <td class="texto-fuente" data-bind="text: adicionales"></td>
+                                            <td class="texto-fuente" data-bind="text: adicionales"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FÍN COBERTURAS -->
+
+            </div>
+
+            <div id="Siniestros" class="tab-pane fade">
+
+                <!-- SINIESTROS -->
+
+                <div id="Siniestros" data-bind="visible: siniestrosVisible">
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Siniestros</span>
+                        <label style="float: right;">Filtrar:
+                            <input type="text" name="buscador"
+                                onkeyup="tableSearch($('#tablaSiniestros').find('tbody > tr'), this.value, new Array(1,3,7));" />
+                        </label>
+                    </div>
+                    <br>
+                    <div data-bind="visible: informacionSiniestros.length = 0">
+                        <center><span class="texto-fuente">El productor no tiene ramos asociados.</span></center>
+                    </div>
+                    <br>
+                    <div id="siniestrosBody" data-bind="Visible: informacionSiniestros.length > 0">
+                        <div id="InformacionSiniestros" class="col-md-12">
+                            <div class="table-responsive table-hover">
+                                <table id="tablaSiniestros" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Numero</th>
+                                            <th class="texto-fuente">Nombre Ramo</th>
+                                            <th class="texto-fuente">Poliza</th>
+                                            <th class="texto-fuente">Certificados</th>
+                                            <th class="texto-fuente">Fecha</th>
+                                            <th class="texto-fuente">Tipo de Siniestro</th>
+                                            <th class="texto-fuente">Riesgo Cubierto</th>
+                                            <th class="texto-fuente">Tiene SubSiniestros</th>
+                                            <th class="texto-fuente">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionSiniestros">
+                                        <tr class="polizas-fila" data-bind="click: siniestroBehaviour">
+                                            <td class="texto-fuente" data-bind="text: numero"></td>
+                                            <td class="texto-fuente" data-bind="text: nombre_ramo"></td>
+                                            <td class="texto-fuente" data-bind="text: poliza"></td>
+                                            <td class="texto-fuente" data-bind="text: certificados"></td>
+                                            <td class="texto-fuente" data-bind="text: fecha"></td>
+                                            <td class="texto-fuente" data-bind="text: tipo_siniestro"></td>
+                                            <td class="texto-fuente" data-bind="text: riesgo_cubierto"></td>
+                                            <td class="texto-fuente" data-bind="text: tiene_subsiniestro"></td>
+                                            <td class="texto-fuente" data-bind="text: estado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIN SINIESTROS -->
+
+                <!-- DETALLE DE SINIESTRO -->
+
+                <div id="DetallesDeSiniestro" class="ramos-body" data-bind="visible: detalleDeSiniestrosVisible">
+                    <span class="boton-volver" data-bind="click: volverSiniestros">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Detalle de Siniestro</span>
+                    </div>
+                    <div id="DetallesDeSiniestroBody">
+                        <div id="InformacionGeneralDetallesDeSiniestro">
+                            <h2 class="seccion-subtitulo">Informacion General</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody data-bind="foreach: informacionDetalleDeSiniestros">
+                                        <tr>
+                                            <td>
+                                                <span class="texto-fuente" data-bind="text: etiqueta"></span>
+                                            </td>
+                                            <td>
+                                                <span class="detallePolizas-detalleDato" data-bind="text: valor"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-primary"
+                                data-bind="click: abrirLiquidaciones, visible: botonLiquidacionesVisible">Liquidaciones</button>
+                            <button type="button" class="btn btn-primary"
+                                data-bind="click: abrirNotas, visible: botonNotasVisible">Notas</button>
+                            <button type="button" class="btn btn-primary"
+                                data-bind="click: abrirTerceros, visible: botonTercerosVisible">Terceros</button>
+                            <button type="button" class="btn btn-primary"
+                                data-bind="click: abrirBeneficiarios, visible: botonBeneficiariosVisible">Beneficiarios</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <!-- FIN DETALLE DE SINIESTRO -->
+
+                <!-- LIQUIDACIONES -->
+
+                <div id="Liquidaciones" data-bind="visible: liquidacionesVisible" class="detalleSiniestro">
+                    <span class="boton-volver" data-bind="click: volverDetalleDeSiniestros">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Liquidaciones</span>
+                    </div>
+                    <div id="LiquidacionesBody">
+                        <div id="InformacionLiquidacicones" class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Numero</th>
+                                            <th class="texto-fuente">Alta</th>
+                                            <th class="texto-fuente">Tentativa</th>
+                                            <th class="texto-fuente">Conformidad</th>
+                                            <th class="texto-fuente">Beneficiario</th>
+                                            <th class="texto-fuente">Concepto</th>
+                                            <th class="texto-fuente">Moneda</th>
+                                            <th class="texto-fuente">Monto</th>
+                                            <th class="texto-fuente">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionLiquidaciones">
+                                        <tr class="polizas-fila">
+                                            <td class="texto-fuente" data-bind="text: numero_compromiso"></td>
+                                            <td class="texto-fuente" data-bind="text: alta"></td>
+                                            <td class="texto-fuente" data-bind="text: tentativa"></td>
+                                            <td class="texto-fuente" data-bind="text: conformidad"></td>
+                                            <td class="texto-fuente" data-bind="text: beneficiario"></td>
+                                            <td class="texto-fuente" data-bind="text: concepto"></td>
+                                            <td class="texto-fuente" data-bind="text: moneda"></td>
+                                            <td class="texto-fuente" data-bind="text: monto"></td>
+                                            <td class="texto-fuente" data-bind="text: Estado"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIN LIQUIDACIONES -->
+
+                <!-- BENEFICIARIO -->
+
+                <div id="Beneficiarios" data-bind="visible: beneficiariosVisible" class="detalleSiniestro">
+                    <span class="boton-volver" data-bind="click: volverDetalleDeSiniestros">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Beneficiarios</span>
+                    </div>
+                    <div id="BeneficiariosBody">
+                        <div id="InformacionBeneficiarios" class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Nombre</th>
+                                            <th class="texto-fuente">DNI</th>
+                                            <th class="texto-fuente">ID Rector</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionBeneficiarios">
+                                        <tr class="polizas-fila">
+                                            <td class="texto-fuente" data-bind="text: nombre"></td>
+                                            <td class="texto-fuente" data-bind="text: dni"></td>
+                                            <td class="texto-fuente" data-bind="text: id_rector"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIN BENEFICIARIO -->
+
+
+                <!-- NOTAS -->
+
+                <div id="Notas" data-bind="visible: notasVisible" class="detalleSiniestro">
+                    <span class="boton-volver" data-bind="click: volverDetalleDeSiniestros">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Notas</span>
+                    </div>
+                    <div id="NotasBody">
+                        <div id="InformacionNotas" class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Fecha</th>
+                                            <th class="texto-fuente">Usuario</th>
+                                            <th class="texto-fuente">Contenido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionNotas">
+                                        <tr class="polizas-fila">
+                                            <td class="texto-fuente" data-bind="text: fecha"></td>
+                                            <td class="texto-fuente" data-bind="text: usuario"></td>
+                                            <td class="texto-fuente" data-bind="text: contenido"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIN NOTAS  -->
+
+                <!-- TERCEROS -->
+
+                <div id="Terceros" data-bind="visible: tercerosVisible" class="detalleSiniestro">
+                    <span class="boton-volver" data-bind="click: volverDetalleDeSiniestros">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Terceros</span>
+                    </div>
+                    <div id="TercerosBody">
+                        <div id="InformacionTerceros" class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Tipo Siniestro</th>
+                                            <th class="texto-fuente">Numero</th>
+                                            <th class="texto-fuente">Identificación</th>
+                                            <th class="texto-fuente">Nombre</th>
+                                            <th class="texto-fuente">Delegacion</th>
+                                            <th class="texto-fuente">Analista</th>
+                                            <th class="texto-fuente">Estado</th>
+                                            <th class="texto-fuente">Cia Tercero</th>
+                                            <th class="texto-fuente">Patente</th>
+                                            <th class="texto-fuente">Letrado</th>
+                                            <th class="texto-fuente">Estudio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionTerceros">
+                                        <tr class="polizas-fila">
+                                            <td class="texto-fuente" data-bind="text: tipo_siniestro"></td>
+                                            <td class="texto-fuente" data-bind="text: numero"></td>
+                                            <td class="texto-fuente" data-bind="text: identificacion"></td>
+                                            <td class="texto-fuente" data-bind="text: nombre"></td>
+                                            <td class="texto-fuente" data-bind="text: delegacion"></td>
+                                            <td class="texto-fuente" data-bind="text: analista"></td>
+                                            <td class="texto-fuente" data-bind="text: estado"></td>
+                                            <td class="texto-fuente" data-bind="text: cia_tercero"></td>
+                                            <td class="texto-fuente" data-bind="text: patente"></td>
+                                            <td class="texto-fuente" data-bind="text: letrado"></td>
+                                            <td class="texto-fuente" data-bind="text: estudio"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIN TERCEROS -->
+
+
+            </div>
+
+            <div id="Cobranzas" class="tab-pane fade">
+                <!-- COBRANZAS -->
+
+                <div id="Cobranzas" data-bind="visible: mostrarCobranzas">
+                    <div class="seccion-titulo-div">
+                        <span class="seccion-titulo" align="center">Cobranzas</span>
+                    </div>
+                    <div id="CobranzasBody">
+                        <div id="informacionCobranzas" class="col-md-12">
+                            <div class="table-responsive">
+                                <br />
+                                <center><b>Último pago realizado : </b><span data-bind="text: polizaFecha"></span>
+                                </center>
+                                <br />
+                                <center><b>Deuda : </b><span data-bind="text: polizaDeuda"></span></center>
+                                <br />
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="texto-fuente">Poliza</th>
+                                            <th class="texto-fuente">Ramo</th>
+                                            <th class="texto-fuente">Certificado</th>
+                                            <th class="texto-fuente">Moneda</th>
+                                            <th class="texto-fuente">Saldo MO</th>
+                                            <th class="texto-fuente">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionCobranzasListaPaginada">
+                                        <tr class="polizas-fila" data-bind="click: cobranzaBehaviour">
+                                            <td class="texto-fuente" data-bind="text: poliza"></td>
+                                            <td class="texto-fuente" data-bind="text: ramo"></td>
+                                            <td class="texto-fuente" data-bind="text: certificado"></td>
+                                            <td class="texto-fuente" data-bind="text: moneda"></td>
+                                            <td class="texto-fuente" data-bind="text: saldo_mo"></td>
+                                            <td class="texto-fuente" data-bind="text: saldo"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="PaginadorCobranzas" align="center" data-bind="visible: cobranzaVisible">
+                    <ul class="pagination">
+                        <li class="page-item" data-bind="css: { disabled: informacionCobranzasPaginaActual() === 0 }">
+                            <a class="page-link" href="#" data-bind="click: informacionCobranzasPaginaAnterior"
+                                aria-label="Anterior">
+                                <span aria-hidden="true" class="texto-fuente">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pagination" data-bind="foreach: informacionCobranzasTodasLasPaginas">
+                        <li class="page-item"
+                            data-bind="css: { active: $data.numeroPagina === ($root.informacionCobranzasPaginaActual() + 1) }">
+                            <a class="page-link texto-fuente" href="#"
+                                data-bind="text: $data.numeroPagina, click: function() { $root.informacionCobranzasIrAPagina($data.numeroPagina-1); }"></a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li class="page-item"
+                            data-bind="css: { disabled: informacionCobranzasPaginaActual() === informacionCobranzasMaximoPaginas() }">
+                            <a class="page-link" href="#" data-bind="click: informacionCobranzasPaginaSiguiente"
+                                aria-label="Siguiente">
+                                <span aria-hidden="true" class="texto-fuente">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--FÍN COBRANZAS -->
+
+                <!--DETALLES DE COBRANZAS -->
+
+                <div id="CobranzasDetalle" data-bind="visible: cobranzasDetalleVisible">
+                    <span class="boton-volver" data-bind="click: mostrarCobranzas">
+                        <img data-bind="attr: { src: volverURL }">
+                    </span>
+                    <div class="seccion-titulo-div">
+                        <center><span class="seccion-titulo">Detalle Cobranzas</span></center>
+                    </div>
+                    <div id="DetalleCobranzasBody">
+                        <div id="InformacionDetalleCobranza" class="col-md-12">
+                            <div class="table-responsive">
+                                <br />
+                                <center><b>Último pago realizado : </b><span
+                                        data-bind="text: cobranzasUltimoPago"></span></center>
+                                <br />
+                                <center><b>Deuda : </b><span data-bind="text: cobranzasDeuda"></span>
+                                    <span data-bind="text: cobranzasMoneda"></span></center>
+                                <br />
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th class="texto-fuente">Certificado</th>
+                                        <th class="texto-fuente">Fecha vencimiento</th>
+                                        <th class="texto-fuente">Estado</th>
+                                        <th class="texto-fuente">Premio</th>
+                                        <th class="texto-fuente">Saldo Exigible</th>
+                                    </thead>
+                                    <tbody data-bind="foreach: informacionDetalleCobranza">
+                                        <tr class="polizas-fila">
+                                            <td class="texto-fuente" data-bind="text: nrocertificado"></td>
+                                            <td class="texto-fuente" data-bind="text: fecha_vto"></td>
+                                            <td class="texto-fuente" data-bind="text: estado"></td>
+                                            <td class="texto-fuente" data-bind="text: premio"></td>
+                                            <td class="texto-fuente" data-bind="text: saldo_exigible"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="PaginadorDetallesCobranzas" align="center" data-bind="visible: cobranzasDetalleVisible">
+                    <ul class="pagination">
+                        <li class="page-item"
+                            data-bind="css: { disabled: informacionDetallesCobranzasPaginaActual() === 0 }">
+                            <a class="page-link" href="#" data-bind="click: informacionDetallesCobranzasPaginaAnterior"
+                                aria-label="Anterior">
+                                <span aria-hidden="true" class="texto-fuente">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="pagination" data-bind="foreach: informacionDetallesCobranzasTodasLasPaginas">
+                        <li class="page-item"
+                            data-bind="css: { active: $data.numeroPagina === ($root.informacionDetallesCobranzasPaginaActual() + 1) }">
+                            <a class="page-link texto-fuente" href="#"
+                                data-bind="text: $data.numeroPagina, click: function() { $root.informacionDetallesCobranzasIrAPagina($data.numeroPagina-1); }"></a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li class="page-item"
+                            data-bind="css: { disabled: informacionDetallesCobranzasPaginaActual() === informacionDetallesCobranzasMaximoPaginas() }">
+                            <a class="page-link" href="#" data-bind="click: informacionDetallesCobranzasPaginaSiguiente"
+                                aria-label="Siguiente">
+                                <span aria-hidden="true" class="texto-fuente">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- FÍN DETALLES DE COBRANZAS -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

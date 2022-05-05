@@ -1,0 +1,35 @@
+function quickCreateOnLoad(){
+
+
+document.getElementsByClassName('glLinkLiv')[0].style.display='none'
+
+}
+function vistaNombreRamo(executionContext){
+
+ var formContext = executionContext.getFormContext();
+   if (formContext.getAttribute("axx_ramo").getValue() != null)
+    {    
+     RAMO = formContext.getAttribute("axx_ramo").getValue()[0].name;
+     
+     formContext.getAttribute("axx_ramotexto").setValue(RAMO);
+     }
+}
+function vistaNombreCuenta(executionContext){
+
+ var formContext = executionContext.getFormContext();
+ if (formContext.getAttribute("parentaccountid").getValue() != null){
+ var cuenta = formContext.getAttribute("parentaccountid").getValue()[0].name;
+ 
+ formContext.getAttribute("axx_cuentatexto").setValue(cuenta);
+}
+}
+function vistaNombreProd(executionContext){
+
+ var formContext = executionContext.getFormContext();
+ 
+  if (formContext.getAttribute("axx_productorid").getValue() != null){
+ var productor = formContext.getAttribute("axx_productorid").getValue()[0].name;
+ 
+ formContext.getAttribute("axx_productortexto").setValue(productor);
+}
+}

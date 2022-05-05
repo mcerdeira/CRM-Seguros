@@ -1,0 +1,226 @@
+/* General */
+
+.texto-fuente{
+    /* --- Ajuste solicitado por Provincia: utilizar la fuente de D365*/
+
+    font-family: 'Segoe UI', Tahoma, Arial, 'SegoeUI', 'Segoe UI Regular';
+    color: #828181 !important;
+    /*color: rgb(130, 129, 129) !important;*/
+    font-size: 14px;
+    
+    /* --- Base original de la Posición Consolidada*/
+    
+    /*color: #828181 !important;
+    /*font-family: 'Segoe UI Regular', 'SegoeUI', 'Segoe UI';
+    font-size: 2vw;*/
+}
+
+.tabs-titulo{
+
+    /* --- Ajuste solicitado por Provincia: utilizar la fuente de D365*/
+
+    color: rgb(80, 80, 80) !important;
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Arial, 'SegoeUI', 'Segoe UI Regular';
+    font-size: 14px;
+    font-weight: 600;
+    
+    /* --- Base original de la Posición Consolidada*/
+    
+    /*color: rgb(102, 102, 102) !important;
+    /*font-family: 'Segoe UI Regular', 'SegoeUI', 'Segoe UI';
+    font-size: 2vw;*/
+}
+
+.texto-boton{
+    cursor: pointer;
+}
+
+.boton-volver{
+    display: block;
+    float: left;
+    cursor: pointer;
+}
+
+.seccion-titulo-div{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.seccion-titulo{
+    /* --- Ajuste solicitado por Provincia: utilizar la fuente de D365*/
+
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Arial, 'SegoeUI', 'Segoe UI Regular';
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    
+    /* --- Base original de la Posición Consolidada*/
+
+    /*font-family: 'Segoe UI Regular', 'SegoeUI', 'Segoe UI';
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: uppercase;*/
+    
+}
+
+.seccion-subtitulo{
+    text-align: left;
+    font-family: 'Segoe UI Semibold', SegoeUI-Semibold, 'Segoe UI Regular', 'Segoe UI';
+    /*font-family: SegoeUI-Semibold, "Segoe UI Semibold", "Segoe UI Regular", "Segoe UI";*/
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: rgb(51, 51, 51) !important;
+    text-transform: uppercase;
+}
+
+.texto-carta-div{
+    height: 6%;
+}
+
+.texto-carta{
+    color: #828181 !important;
+    font-family: tahoma;
+    font-size: 2vw;
+}
+
+/*Fín general*/
+
+/*Loader*/
+
+.loader-container {
+  width: 100%;
+  height: 100%;
+  background: #EEE;
+  min-height: 250px;
+  position: relative;
+}
+
+.loader-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+/*Fin Loader*/
+
+/*Ramos*/
+
+.ramos-body {
+    width: 90%;
+}
+
+.ramos-tarjeta{
+    cursor: pointer;
+}
+
+.ramos-titulo-riesgos{
+    text-align: center;
+    color: #505050 !important;
+    font-weight: 600 !important;
+    font-family: tahoma;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/*Fín Ramos*/
+
+/*Polizas*/
+
+.polizas-fila{
+    cursor: pointer;
+}
+
+.polizas-paginador{
+        width: 50%;
+        margin: 0 auto;
+}
+
+/*Fin Polizas*/
+
+/*Detalles de Polizas*/
+
+.detallesPoliza-botones-div{
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.detallesPoliza-botones{
+    cursor: pointer;
+    color: #828181 !important;
+    font-family: tahoma;
+    font-weight: bold;
+}
+
+.detallesPolizas-detalleTitulo{
+    color: #828181 !important;
+    font-family: tahoma;
+}
+
+.detallePolizas-detalleDato{
+    font-size: 14px;
+}
+
+.detallesPoliza-buscador{
+    width: 30%;
+}
+
+/*Fin Detalles de Polizas*/
+
+/*Detalle de Siniestros*/
+.detalleSiniestro{
+}
+/*FIN Detalle de Siniestros*/
+
+/*Extensiones del Bootstrap*/
+
+.table-borderless td, .table-borderless th {
+    border: 0px;
+}
+
+.table-responsive{
+    border: 0px !important;
+}
+
+.table>tbody>tr>td{
+    padding-top: 2%;
+    padding-bottom: 2.5%;
+    width: 30%;
+}
+
+.col-3{
+    padding-bottom: 10px;
+}
+
+.page-item.active .page-link{
+    background-color: #b1b1b1 !important;
+    border-color: #b1b1b1 !important;
+}
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover,
+.nav-pills > li > a:hover{
+text-decoration: none;
+font-weight: bold;
+border-radius:0px;
+border-bottom-width: 4px;
+border-bottom-style: solid;
+border-bottom-color: rgb(0, 0, 0);
+    color: #000 !important;
+    background-color: transparent !important;
+}
+.nav-pills > li > a{
+    border-radius:0px;
+    color:#000;
+}
+
+/*Fin Extensiones del Boostrap*/

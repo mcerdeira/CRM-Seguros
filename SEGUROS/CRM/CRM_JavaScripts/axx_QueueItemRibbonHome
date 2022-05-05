@@ -1,0 +1,104 @@
+QueueItemRibbonHome = {
+    Tomar: function (data) {
+        debugger;
+        Xrm.Utility.showProgressIndicator("Procesando....");
+        for (var i = 0; i < data.length; i++) {
+            QueueItemRibbonHome.RunWorkFlow("A32160B9-91F5-4B38-BE87-159B11513306", data[i], "Usted ha tomado la Cotización para trabajar en ella.");
+        }
+    },
+
+    Liberar: function (data) {
+        debugger;
+        Xrm.Utility.showProgressIndicator("Procesando....");
+        for (var i = 0; i < data.length; i++) {
+            QueueItemRibbonHome.RunWorkFlow("2DA48331-CC4E-4375-B854-8B60DD813CF6", data[i], "Cotización liberada.");
+        }
+    },
+
+    RunWorkFlow(wfId, recordId, okmsg) {
+        var parameters = {};
+        parameters.EntityId = recordId;
+        var req = new XMLHttpRequest();
+        req.open("POST", Xrm.Page.context.getClientUrl() + `/api/data/v9.1/workflows(${wfId})/Microsoft.Dynamics.CRM.ExecuteWorkflow`, true);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                //alert(this.response);
+                req.onreadystatechange = null;
+                if (this.status === 200 || this.status === 204) {
+                    QueueItemRibbonHome.OnWorkFlowCompleted(okmsg);
+                } else {
+                    Xrm.Utility.alertDialog(this.status  + " Error al invocar el Proceso");
+                }
+            }
+        };
+        req.send(JSON.stringify(parameters));
+    },
+
+
+    RunWorkFlowAsync(wfId, recordId, okmsg) {
+        var parameters = {};
+        parameters.EntityId = recordId;
+        var req = new XMLHttpRequest();
+        req.open("POST", Xrm.Page.context.getClientUrl() + `/api/data/v9.1/workflows(${wfId})/Microsoft.Dynamics.CRM.ExecuteWorkflow`, true);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                //alert(this.response);
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var results = JSON.parse(this.response);
+                    var asyncoperationid = results.asyncoperationid;
+                    QueueItemRibbonHome.WaitForWorkflowToComplete(asyncoperationid, okmsg);
+                } else {
+                    Xrm.Utility.alertDialog(this.statusText);
+                    Xrm.Utility.closeProgressIndicator();
+                }
+            }
+        };
+        req.send(JSON.stringify(parameters));
+    },
+
+    OnWorkFlowCompleted: async function (completedMsg) {
+        Xrm.Utility.closeProgressIndicator();
+        Xrm.Navigation.openAlertDialog({ text: completedMsg }).then(function () {
+            var lookupOptions = {};
+            lookupOptions.entityType = "queueitem";
+            Xrm.Utility.refreshParentGrid(lookupOptions);
+        }
+        );
+    },
+
+    WaitForWorkflowToComplete: async function (asyncoperationid, completedMsg) {
+        var startTime = new Date();
+        let completed = false;
+        while (!completed) {
+            const workflowInstance = await Xrm.WebApi.retrieveRecord(
+                "asyncoperation",
+                asyncoperationid,
+                "?$select=statecode,statuscode",
+            );
+            const statuscode = workflowInstance.statuscode;
+            if (statuscode && statuscode == 30) {
+                completed = true;
+            } else if ((statuscode && statuscode >= 31) || (new Date().getTime() - startTime.getTime()) / 1000 > 180000) {
+                Xrm.Utility.alertDialog("Exception during running workflow");
+            }
+        }
+        Xrm.Utility.closeProgressIndicator();
+        if (completed) {
+            Xrm.Navigation.openAlertDialog({ text: completedMsg }).then(function () {
+                var lookupOptions = {};
+                lookupOptions.entityType = "queueitem";
+                Xrm.Utility.refreshParentGrid(lookupOptions);
+            }
+            );
+        }
+    }
+};

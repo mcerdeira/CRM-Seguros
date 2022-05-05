@@ -1,0 +1,55 @@
+if (typeof (Customs) == "undefined") {
+    Customs = { __namespace: true };
+}
+
+Customs.BloqueoClientes = {
+    NotifId: "Customs.BloqueoClientes",
+    LocalData: { POLIZAS_URL: "", },
+
+    OnLoad: function (executionContext) {
+        let formContext = executionContext.getFormContext();
+        Customs.BloqueoClientes.Init(formContext);
+    },
+
+    OnSave: function (executionContext) {
+        //TODO: LLamar a entidades relacionadas para obener códigos a enviar al servicio.
+        let formContext = executionContext.getFormContext();
+        let formType = formContext.ui.getFormType();
+        if (Pnet.General.FormIsCreate(formType)) { // Solo llamamos a la API en la creación del registro
+            formContext.ui.clearFormNotification(Customs.BloqueoClientes.NotifId);
+            let url = Customs.BloqueoClientes.LocalData.POLIZAS_URL + Pnet.General.POLIZAS_DATA.BLOQUEOS_ENDPOINT;
+            Pnet.General._CallRectorWS(url, "GET", null, null, Customs.BloqueoClientes.BloqueoApiSuccess, Customs.BloqueoClientes.OnError, executionContext);
+        }
+    },
+
+    Init: function (executionContext) {
+        Pnet.General._GetParam(Pnet.General.POLIZAS_DATA.POLIZAS_URL, Customs.BloqueoClientes.GetParamCallback);
+    },
+
+    BloqueoApiSuccess: function (data, executionContext) {
+        let formContext = executionContext.getFormContext();
+        if (data.result) {
+            formContext.getAttribute("axx_fechafin").setSubmitMode("always");
+            formContext.getAttribute("axx_fechafin").setValue(new Date(data.date));
+            formContext.data.entity.save();
+        } else {
+            formContext.ui.setFormNotification(`Error al sincronizar con Rector: ${data.result_text}`, "ERROR", Customs.BloqueoClientes.NotifId);
+        }
+    },
+
+    GetParamCallback: function (results) {
+        if (results && results.entities) {
+            //LocalData.POLIZAS_URL = results.entities[0].axx_valor
+            // TODO: reemplazar por la url de Rector desde axx_valor
+            Customs.BloqueoClientes.LocalData.POLIZAS_URL = "https://fakemyapi.com";
+        }
+    },
+
+    OnError: function (errorObj, executionContext) {
+        let error = errorObj.message ? errorObj.message : errorObj;
+        let formContext = executionContext.getFormContext();
+        formContext.ui.setFormNotification(error, "ERROR", Customs.BloqueoClientes.NotifId);
+    },
+
+    __namespace: true
+};

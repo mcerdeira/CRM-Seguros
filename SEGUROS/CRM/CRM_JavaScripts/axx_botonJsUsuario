@@ -1,0 +1,74 @@
+function borraUsuarioVD(executionContext)
+{
+	//	setTimeout(function ()
+	//	{
+    var globalContext = Xrm.Utility.getGlobalContext();
+	//var formContext = executionContext.getFormContext(); // get the form Context
+	var settings = globalContext.userSettings;
+	var usuarioId = settings.userId.replace('{', '').replace('}', '');
+	var usuarionombre = settings.userName;
+	//        var gridContext = formContext.getControl("Ventas"); // get the grid context
+	//        var myRows = gridContext.getGrid().getRows();
+	//        //var myRow = myRows.get("axx_usuarioactual");
+	Xrm.WebApi.retrieveMultipleRecords("axx_ventadirecta", "?$filter=_axx_usuarioactual_value eq " + usuarioId).then
+	(
+
+		function success(result)
+		{
+			//alert("Usuario Actual: "+result.entities[i]._axx_usuarioactual_value+", Id VD: "+result.entities[i].axx_idvd);
+			//Inicio foreach
+			result.entities.forEach(function (row)
+			{
+				var usuarioIdGrid = row._axx_usuarioactual_value;
+				var usuarioIdGrid2 = usuarioIdGrid.toUpperCase();
+				var idVd = row.axx_ventadirectaid;
+				//alert("Usuario Actual ID grid : " + usuarioIdGrid2 + "Usuario Actual ID: " + usuarioId);
+				if (usuarioIdGrid2 == usuarioId)
+				{
+					Xrm.Utility.showProgressIndicator("Espere un segundo");
+					// if (gridColumns != null){
+					var req = new XMLHttpRequest();
+					req.open("DELETE", globalContext.getClientUrl() + "/api/data/v9.1/axx_ventadirectas(" + idVd + ")/axx_UsuarioActual/$ref", false);
+					req.setRequestHeader("Accept", "application/json");
+					req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+					req.setRequestHeader("OData-MaxVersion", "4.0");
+					req.setRequestHeader("OData-Version", "4.0");
+					req.onreadystatechange = function ()
+					{
+						if (this.readyState === 4)
+						{
+							req.onreadystatechange = null;
+							if (this.status === 204 || this.status === 1223)
+							{
+								//alert("ok");//Success - No Return Data - Do Something
+								//									alert("El usuario " + usuarioIdGrid + " que trabajaba en el caso número Id numero:" + idVd +
+								//										"es igual al usuario logueado: " + usuarioId + "por lo tanto debe liberar el registro.");
+								//									//             formContext.data.entity.refresh();
+								//            
+							}
+							else
+							{
+								Xrm.Utility.alertDialog(this.statusText);
+							}
+						}
+					};
+					req.send();
+					// formContext.getControl("Ventas").refresh();
+					var lookupOptions = {};
+					lookupOptions.entityType = "axx_ventadirecta";
+					Xrm.Utility.refreshParentGrid(lookupOptions);
+					Xrm.Utility.closeProgressIndicator();
+				}
+			});
+			//                    //end of foreach                
+		},
+
+		function (error)
+		{
+			console.log(error.message);
+			// handle error conditions
+		}
+	);
+	// alert(usuarioId);  
+	//	}, 2000);
+}

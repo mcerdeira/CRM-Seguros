@@ -1,0 +1,172 @@
+if (typeof (Pnet) == "undefined") {
+    Pnet = { __namespace: true };
+}
+
+Pnet.General = {
+    RolesStrings: {
+        Rol_Comercial: "PS - Rol Comercial",
+        Rol_Suscriptor: "PS - Rol Suscriptor",
+        Rol_Administrador: "Administrador del sistema",
+    },
+    FormTypes:{Undefined:0, Create: 1, Update: 2, Read_Only:3, Disabled: 4, Bulk_Edit:6},
+    POLIZAS_DATA: {POLIZAS_URL: "POLIZAS_URL", 
+                   BLOQUEOS_ENDPOINT: "/api/fake?id=f6aa841c-8d39-4c4a-94fb-eae2de526828", //TODO: Reemplazar con endpoint real
+                   POLIZAS_USUARIO_SERVICIOS: "POLIZAS_USUARIO_SERVICIOS", 
+    },
+
+    RunWorkFlow(wfId, recordId, okmsg, reload) {
+        var parameters = {};
+        parameters.EntityId = recordId;
+        var req = new XMLHttpRequest();
+        req.open("POST", Xrm.Page.context.getClientUrl() + `/api/data/v9.1/workflows(${wfId})/Microsoft.Dynamics.CRM.ExecuteWorkflow`, true);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                //alert(this.response);
+                req.onreadystatechange = null;
+                if (this.status === 200 || this.status === 204) {
+                    Pnet.General.OnWorkFlowCompleted(okmsg, reload);
+                } else {
+                    Xrm.Utility.alertDialog(this.status  + " Error al invocar el Proceso");
+                }
+            }
+        };
+        req.send(JSON.stringify(parameters));
+    },
+
+    OnWorkFlowCompleted: async function (completedMsg, reload) {
+        Xrm.Utility.closeProgressIndicator();
+        Xrm.Navigation.openAlertDialog({ text: completedMsg }).then(function () {
+            if(reload){
+                location.reload();
+                window.parent.location.reload();
+            }
+        }
+        );
+    },
+
+    RunWorkFlowAsync(workflowId, recordId, completedMsg, CallBack) {
+        var parameters = {};
+        parameters.EntityId = recordId;
+        var req = new XMLHttpRequest();
+        req.open("POST", Xrm.Page.context.getClientUrl() + `/api/data/v9.1/workflows(${workflowId})/Microsoft.Dynamics.CRM.ExecuteWorkflow`, true);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                //alert(this.response);
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var results = JSON.parse(this.response);
+                    var asyncoperationid = results.asyncoperationid;
+                    Pnet.General.WaitForWorkflowToComplete(asyncoperationid, completedMsg, CallBack);
+                } else {
+                    Xrm.Utility.alertDialog(this.statusText);
+                }
+            }
+        };
+        req.send(JSON.stringify(parameters));
+    },
+
+    WaitForWorkflowToComplete: async function (asyncoperationid, completedMsg, CallBack) {
+        var startTime = new Date();
+        let completed = false;
+        while (!completed) {
+            const workflowInstance = await Xrm.WebApi.retrieveRecord(
+                "asyncoperation",
+                asyncoperationid,
+                "?$select=statecode,statuscode",
+            );
+            const statuscode = workflowInstance.statuscode;
+            if (statuscode && statuscode == 30) {
+                completed = true;
+            } else if ((statuscode && statuscode >= 31) || (new Date().getTime() - startTime.getTime()) / 1000 > 180000) {
+                Xrm.Utility.alertDialog("Exception during running workflow");
+            }
+        }
+        if (completed) {
+            if(completedMsg){
+                Xrm.Navigation.openAlertDialog({ text: completedMsg }).then(function () {
+                    if(CallBack){
+                        CallBack();
+                    }
+                }
+                );
+            } else {
+                if(CallBack){
+                    CallBack();
+                }
+            }
+        }
+    },
+    
+    toLookUp: function (entity, id, name) {
+        var lookupValue = new Array();
+        lookupValue[0] = new Object();
+        lookupValue[0].id = id;
+        lookupValue[0].name = name;
+        lookupValue[0].entityType = entity;
+        return lookupValue;
+    },
+
+ _UserIsRoles: function (roles, rolestring) {
+        for (var i = 0; i < roles[0].systemuserroles_association.results.length; i++) {
+            if (roles[0].systemuserroles_association.results[i].Name.toLowerCase() == rolestring.toLowerCase()) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    FormIsCreate: function(formType){
+        return formType == this.FormTypes.Create;
+    },
+
+    FormIsUpdate: function(formType){
+        return formType == this.FormTypes.Update;
+    },
+
+    _GetParam: function (key, callBack) {
+        Xrm.WebApi.online.retrieveMultipleRecords("axx_parametrizaciondesarrollo", `?$select=axx_valor&$filter=axx_clave eq '${key}'`).then(
+            function success(results) {
+                callBack(results);
+            },
+            function(error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+    },
+
+    _CallRectorWS: function (url, method, headers, body, OnSuccess, OnError, executionContext) {
+        $.ajax({
+            dataType: 'json',
+            contentType: 'application/json',
+            headers: headers,
+            data: JSON.stringify(body),
+            type: method,
+            url: url,
+            success: function (data) {
+                OnSuccess(data, executionContext);
+            },
+            error: function (e, ee, eee) {
+                if (!e || !e.responseJSON || !e.responseJSON.Message) {
+                    OnError([{ Message: "Error al llamar al Servicio." }], executionContext);
+                } else {
+                    try {
+                        console.log(e.responseJSON.Message);
+                        OnError(JSON.parse(e.responseJSON.Message), executionContext);
+                    } catch (err) {
+                        OnError([{ Message: e.responseJSON.Message }], executionContext);
+                    }
+                }
+            },
+        });
+    },
+
+    __namespace: true
+};

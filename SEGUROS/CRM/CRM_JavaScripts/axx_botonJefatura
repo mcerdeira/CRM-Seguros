@@ -1,0 +1,22 @@
+function derivarJefatura(primaryControl) {
+    debugger;
+    var formContext = primaryControl.data._formContext;
+    var razonEstado = formContext.getAttribute("statuscode").getValue();
+    var derivadoJefa = formContext.getControl("axx_derivarjefatura").getValue();
+    var confirmStrings = { text: "Esta acción cambiará el estado a 'Pendiente Jefatura' y enviará un mail al Ejecutivo. ¿Desea continuar?", title: "Confirmación" };
+    var confirmOptions = { height: 200, width: 450 };
+
+    Xrm.Navigation.openConfirmDialog(confirmStrings, confirmOptions).then
+        (
+            function (success) {
+                if (success.confirmed) {
+                    var WorkflowId = "022C9AD9-4DC7-429A-9388-04819D719178";
+                    var id = formContext.data.entity.getId();
+                    Pnet.General.RunWorkFlow(WorkflowId, id, "Derivado Correctamente", true);
+                }
+                else {
+                   
+                }
+            }
+        );
+}

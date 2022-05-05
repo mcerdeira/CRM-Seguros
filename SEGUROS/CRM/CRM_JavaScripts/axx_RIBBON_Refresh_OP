@@ -1,0 +1,15 @@
+var flagOK = false;
+
+function OnLoad(){
+    if(!flagOK){ // Solo la primera entrada al Load hace el setInterval!
+        flagOK = true;
+        setInterval(refresh, 30000);
+    }
+    return false;
+}
+
+function refresh(){
+    var lookupOptions = {};
+    lookupOptions.entityType = "opportunity"; 
+    Xrm.Utility.refreshParentGrid(lookupOptions);
+}

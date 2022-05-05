@@ -1,0 +1,375 @@
+function name(executionContext)
+{
+	var formContext = executionContext.getFormContext();
+	var cobInt = formContext.getAttribute("axx_idvd").getValue();
+	var name = formContext.getAttribute("axx_name").getValue();
+    var origenCampana = formContext.getAttribute("axx_origen").getValue();
+	if (cobInt != null)
+	{
+		formContext.getAttribute("axx_name").setValue(cobInt);
+        
+	}
+    
+    var idCampania = formContext.getAttribute("axx_campanaorigen").getValue()[0].id;
+    var idCampaniaSpl = idCampania.replace('{', '').replace('}', '');
+    //var currentForm = formContext.ui.formSelector.getCurrentItem();
+    
+    var req = new XMLHttpRequest();
+    req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/campaigns("+ idCampaniaSpl +")?$select=typecode", true);
+    req.setRequestHeader("OData-MaxVersion", "4.0");
+    req.setRequestHeader("OData-Version", "4.0");
+    req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+    req.onreadystatechange = function() 
+    {
+        if (this.readyState === 4) 
+        {
+            req.onreadystatechange = null;
+            if (this.status === 200) 
+            {
+                var result = JSON.parse(this.response);
+                var typecode = result["typecode"];
+                var typecode_formatted = result["typecode@OData.Community.Display.V1.FormattedValue"];
+            } else 
+            {
+                Xrm.Utility.alertDialog(this.statusText);
+            }
+            var tipoCampania = typecode_formatted;
+           if (tipoCampania == "WEB" || tipoCampania == "Landing") {
+                        formContext.getAttribute("axx_resultado").setRequiredLevel("required");
+                        formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("required");
+                        formContext.getAttribute("axx_descripcion").setRequiredLevel("required");
+                        }
+               else if (tipoCampania == "Referidos"){
+                formContext.getAttribute("axx_resultado").setRequiredLevel("required");
+                formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("required");
+                formContext.getAttribute("axx_descripcion").setRequiredLevel("required");
+/*
+                formContext.getAttribute("axx_nombre").setRequiredLevel("required");
+                formContext.getAttribute("axx_apellido").setRequiredLevel("required");
+                formContext.getAttribute("axx_documento").setRequiredLevel("required");
+                formContext.getAttribute("axx_email").setRequiredLevel("required");
+                formContext.getAttribute("axx_telefono").setRequiredLevel("required");
+*/
+                formContext.getAttribute("axx_ramo1").setRequiredLevel("required");
+                formContext.getAttribute("axx_campanaorigen").setRequiredLevel("required");
+                }
+        }
+    };
+    req.send();
+    
+
+     
+   // formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("required");
+//    if (origenCampana == 282270001){
+//    formContext.getControl("axx_campanaorigen").setDisabled("true");
+//    }
+        
+}
+
+//function redireccionar(executionContext) {
+//    
+//
+//    var formContext = executionContext.getFormContext();
+//    var items = formContext.ui.formSelector.items;
+//    var idCampania = formContext.getAttribute("axx_campanaorigen").getValue()[0].id;
+//    var idCampaniaSpl = idCampania.replace('{', '').replace('}', '');
+//    var currentForm = formContext.ui.formSelector.getCurrentItem();
+//    
+//    var req = new XMLHttpRequest();
+//    req.open("GET", Xrm.Page.context.getClientUrl() + "/api/data/v9.1/campaigns("+ idCampaniaSpl +")?$select=typecode", true);
+//    req.setRequestHeader("OData-MaxVersion", "4.0");
+//    req.setRequestHeader("OData-Version", "4.0");
+//    req.setRequestHeader("Accept", "application/json");
+//    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+//    req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+//    req.onreadystatechange = function() 
+//    {
+//        if (this.readyState === 4) 
+//        {
+//            req.onreadystatechange = null;
+//            if (this.status === 200) 
+//            {
+//                var result = JSON.parse(this.response);
+//                var typecode = result["typecode"];
+//                var typecode_formatted = result["typecode@OData.Community.Display.V1.FormattedValue"];
+//            } else 
+//            {
+//                Xrm.Utility.alertDialog(this.statusText);
+//            }
+//            var campania = typecode_formatted
+//            
+//            var currentForm = formContext.ui.formSelector.getCurrentItem();
+//            
+//            var length = items.getAll().length;
+//            
+//            for (index = 0; index < length; index++) {
+//            
+//                var form = items.get(index);
+//            
+//                if ((form.getLabel() == "Información") && (currentForm.getLabel() != form.getLabel())) { //currentForm.getLabel()
+//                
+//                    form.navigate();
+//                }
+//            }
+//        }
+//    };
+//    req.send();
+//}
+
+//traer el estado
+//Fecha de Hoy
+setFieldCurrentDate = function (executionContext) {
+        
+    var formContext = executionContext.getFormContext();
+    
+    if(formContext.ui.getFormType()==1) {   // 1 is for new record create state
+        var currentDate = new Date();
+        formContext.getAttribute("axx_fechahoy").setValue(currentDate);
+    }
+
+}
+function getEstado(executionContext)
+{
+	var formContext = executionContext.getFormContext();
+	var resultado = new Array();
+	resultado = formContext.getAttribute("axx_resultado").getValue();
+    if (resultado == null){
+        var estadoVD = new Array();
+        estadoVD[0] = new Object();
+        estadoVD[0].id = "{5add1e2a-62e1-e911-a812-000d3ac1703e}"; // GUID of the lookup id
+        estadoVD[0].name = "Pendiente"; // Name of the lookup
+        estadoVD[0].entityType = "axx_estadoventadirecta"; //Entity Type of the lookup entity
+       formContext.getAttribute("axx_estadovd").setValue(estadoVD);
+    }
+	else if (resultado != null)
+	{
+		var name = resultado[0].name;
+		var id = resultado[0].id;
+		var idsplit = id.replace('{', '').replace('}', '');
+		var entityType = resultado[0].entityType;
+		var estado = formContext.getAttribute("axx_estadovd").getValue();
+		//var estadoId = estado[0].id;
+		var req = new XMLHttpRequest();
+		req.open("GET", formContext.context.getClientUrl() + "/api/data/v8.2/axx_resultadosventadirectas(" + idsplit + ")?$select=axx_contactado,_axx_estadovd_value,axx_name", true);
+		req.setRequestHeader("OData-MaxVersion", "4.0");
+		req.setRequestHeader("OData-Version", "4.0");
+		req.setRequestHeader("Accept", "application/json");
+		req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+		req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+		req.onreadystatechange = function ()
+		{
+			if (this.readyState === 4)
+			{
+				req.onreadystatechange = null;
+				if (this.status === 200)
+				{
+					var result = JSON.parse(this.response);
+					var axx_contactado = result["axx_contactado"];
+					var axx_contactado_formatted = result["axx_contactado@OData.Community.Display.V1.FormattedValue"];
+					var _axx_estadovd_value = result["_axx_estadovd_value"];
+					var _axx_estadovd_value_formatted = result["_axx_estadovd_value@OData.Community.Display.V1.FormattedValue"];
+					var _axx_estadovd_value_lookuplogicalname = result["_axx_estadovd_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+					var axx_name = result["axx_name"];
+					var axx_orden = result["axx_orden"];
+				}
+				else
+				{
+					Xrm.Navigation.openAlertDialog(this.statusText);
+				}
+				var estadoValor = new Array();
+				estadoValor[0] = new Object();
+				estadoValor[0].id = _axx_estadovd_value; // GUID of the lookup id
+				estadoValor[0].name = _axx_estadovd_value_formatted; // Name of the lookup
+				estadoValor[0].entityType = _axx_estadovd_value_lookuplogicalname; //Entity Type of the
+//seteo el campo estado dependiedno del resultado:
+				formContext.getAttribute("axx_estadovd").setValue(estadoValor);
+				formContext.getAttribute("axx_estadotexto").setValue(estadoValor[0].name);
+
+//para ordenar los registros a pedido del usuario:
+				if (_axx_estadovd_value_formatted === "Pendiente")
+				{
+					formContext.getAttribute("axx_orden").setValue(1);
+				}
+				else if (_axx_estadovd_value_formatted === "En trabajo")
+				{
+					formContext.getAttribute("axx_orden").setValue(2);
+                    formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("required");
+                    formContext.getAttribute("axx_fechallamadaagendar").setVisible(true);
+				}
+				else if (_axx_estadovd_value_formatted === "Cerrado")
+				{
+					formContext.getAttribute("axx_orden").setValue(3);
+                    //setear obligatoriesdad de campo llamar el:
+                    formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("none");
+                    formContext.getAttribute("axx_fechallamadaagendar").setVisible(false);
+				}
+				debugger
+			}
+		};
+		req.send();
+	}
+}
+
+//var globalFormContext;
+
+//function subGrid(executionContext)
+//{
+//	globalFormContext = executionContext.getFormContext();
+//	addSubgridEventListener();
+//}
+//
+//function addSubgridEventListener()
+//{
+//	var gridContext = globalFormContext.getControl("llamadas");
+//	//ensure that the subgrid is ready…if not wait and call this function again
+//	if (gridContext == null)
+//	{
+//		setTimeout(function ()
+//		{
+//			addSubgridEventListener();
+//		}, 500);
+//		return;
+//	}
+//	//bind the event listener when the subgrid is ready
+//	gridContext.addOnLoad(subgridEventListener);
+//}
+//
+//function subgridEventListener(executionContext)
+//{
+//	var formContext = executionContext.getFormContext();
+//	var clientUrl = formContext.context.getClientUrl();
+//	var rollupAPIMethod = "/api/data/v9.1/CalculateRollupField(Target=@tid,FieldName=@fn)";
+//	var entityId = formContext.data.entity.getId().replace('{', '').replace('}', '');
+//	rollupAPIMethod += "?@tid={'@odata.id':'axx_ventadirectas(" + entityId + ")'}&@fn='axx_contadorintentos'";
+//	var req = new XMLHttpRequest();
+//	req.open("GET", clientUrl + rollupAPIMethod, false);
+//	req.onreadystatechange = function ()
+//	{
+//		if (this.readyState === 4)
+//		{
+//			req.onreadystatechange = null;
+//			if (this.status === 200)
+//			{
+//				console.log("Field Recalculated successfully");
+//			}
+//		}
+//	};
+//	req.send();
+//	//formContext.data.entity.save();
+//	formContext.data.entity.refresh();
+//}
+////En el onload registrar quien abrio la Venta
+
+function usuario(executionContext)
+{
+
+	var formContext = executionContext.getFormContext();
+	var globalContext = Xrm.Utility.getGlobalContext();
+	var appUrl = globalContext.getCurrentAppUrl();
+	var campaniaNull = formContext.getAttribute("axx_campanaorigen").getValue();
+    var formType =  formContext.ui.getFormType();
+
+if (formType == 2){
+	if (campaniaNull != null)
+	{
+		var campaniaId = formContext.getAttribute("axx_campanaorigen").getValue()[0].id.replace('{', '').replace('}', '');
+	}
+	//var urlAtras = appUrl +"&forceUCI=1&pagetype=entityrecord&etn=campaign&id="+ campaniaId;
+	//formContext.getAttribute("axx_cambio2").setSubmitMode("never");
+	var pageProperty = {
+		pageType: "entityrecord",
+		entityName: "campaign",
+		formType: 2,
+		entityId: campaniaId //guid of record
+	};
+	var settings = globalContext.userSettings;
+	var usuarioId = settings.userId;
+	var usuarionombre = settings.userName;
+	var entidadNombre = "systemuser"
+	var usuarioValor = new Array();
+	usuarioValor[0] = new Object();
+	usuarioValor[0].id = usuarioId; // GUID of the lookup id
+	usuarioValor[0].name = usuarionombre; // Name of the lookup
+	usuarioValor[0].entityType = entidadNombre; //Entity Type of the
+	//alert ( usuarioValor[0] +" y "+ usuarioValor[0].id + " y "+ usuarioValor[0].name +" y "+ usuarioValor[0].entityType)
+	var campoUsuarioAct1 = formContext.getAttribute("axx_usuarioactual").getValue();
+	if (campoUsuarioAct1 === null)
+	{
+		//	setTimeout(function(){
+    formContext.getAttribute("axx_resultado").setRequiredLevel("none");
+    formContext.getAttribute("axx_fechallamadaagendar").setRequiredLevel("none");
+    formContext.getAttribute("axx_descripcion").setRequiredLevel("none");
+    formContext.getAttribute("axx_nombre").setRequiredLevel("none");
+    formContext.getAttribute("axx_apellido").setRequiredLevel("none");
+    formContext.getAttribute("axx_documento").setRequiredLevel("none");
+    formContext.getAttribute("axx_email").setRequiredLevel("none");
+    formContext.getAttribute("axx_telefono").setRequiredLevel("none");
+    formContext.getAttribute("axx_ramo1").setRequiredLevel("none");
+    formContext.getAttribute("axx_campanaorigen").setRequiredLevel("none");
+	formContext.getAttribute("axx_usuarioactual").setValue(usuarioValor);
+		formContext.data.entity.save();
+		// }, 3000);
+	}
+	else if (campoUsuarioAct1 !== null)
+	{
+		var campoUsuarioAct2 = formContext.getAttribute("axx_usuarioactual").getValue()[0].name;
+		if (campoUsuarioAct2 !== usuarionombre)
+		{
+			var alertStrings = {
+				confirmButtonLabel: "OK",
+				text: "El usuario " + campoUsuarioAct2 + " esta trabajando con este registro.",
+				title: "Bloqueo de registro"
+			};
+			var alertOptions = {
+				height: 120,
+				width: 260
+			};
+			Xrm.Navigation.openAlertDialog(alertStrings, alertOptions).then(
+
+			function success(result)
+			{
+				console.log("Alert dialog closed");
+				Xrm.Navigation.navigateTo(pageProperty);
+			},
+
+			function (error)
+			{
+				console.log(error.message);
+			});
+		}
+	}
+	//}, 500);
+}
+}
+
+function onClickNada(executionContext)
+{
+	var formContext = executionContext.getFormContext();
+	var lookupControl = formContext.getControl("axx_resultado");
+	var lookupControl2 = formContext.getControl("axx_ramo1");
+	lookupControl.addOnLookupTagClick(onLookupClick);
+	lookupControl2.addOnLookupTagClick(onLookupClick);
+}
+
+function OnLoadCanal(executionContext){
+    var formContext = executionContext.getFormContext();
+    var axx_canal = formContext.getAttribute("axx_canal").getValue();
+    // Solo visible si el canal es WhatsApp
+    formContext.getControl("axx_link_bot").setVisible((axx_canal == 282270000));
+}
+
+function onLookupClick(executionContext)
+{
+	//to cancel navigation event you can just call following code
+	//executionContext.getEventArgs().preventDefault();
+	//to get entityreference of record from lookup you can use following code:
+	var recordReference = executionContext.getEventArgs().getTagValue();
+	//structure of object is following
+	//{
+	//	id: "cf84d93a-3b5a-ea11-a811-000d3a5a1e46",
+	//	entityType: "account",
+	//	name: "Record Name"
+	//}
+}

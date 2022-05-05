@@ -1,0 +1,61 @@
+var RN = RN || {};
+RN.modalVenta = (function ()
+{
+	function openRecord(recordId)
+	{
+		var recorId2 = recordId.replace('{', '').replace('}', '');
+		//Setting formId to "Default"
+		var formId = "78D55690-58A8-42EC-A819-7EE445B855FA"; //main form
+		//Getting the record
+		Xrm.WebApi.online.retrieveRecord("axx_ventadirecta", recorId2).then(
+
+		function (result)
+		{
+			var Id = result.axx_ventadirectaid;
+			var pageInput = {
+				pageType: "entityrecord",
+				entityName: "axx_ventadirecta",
+				entityId: recorId2
+			};
+			var navigationOptions = {
+				target: 2,
+				height: {
+					value: 100,
+					unit: "%"
+				},
+				width: {
+					value: 100,
+					unit: "%"
+				},
+				position: 1
+			};
+			Xrm.Navigation.navigateTo(pageInput, navigationOptions).then(
+
+			function success()
+			{
+				// Run code on success
+			},
+
+			function error()
+			{
+				// Handle errors
+			});
+		},
+
+		function (error)
+		{
+			//If anything goes wrong log the error
+			console.log(error);
+			//and open "by default"  form
+			Xrm.Navigation.openForm(
+			{
+				entityName: "axx_ventadirecta",
+				entityId: recorId2,
+				formId: formId
+			});
+		});
+	}
+	return {
+		OpenRecord: openRecord,
+	};
+})();

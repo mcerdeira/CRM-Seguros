@@ -1,0 +1,11 @@
+function name(executionContext)
+{
+    var formContext = executionContext.getFormContext();
+    var cobInt = formContext.getAttribute("axx_resultadollamada").getValue()[0].name;
+    var name = formContext.getAttribute("subject").getValue();
+    
+    if (cobInt != null){
+            
+        formContext.getAttribute("subject").setValue("Llamada por VD "+ cobInt);
+        }
+}

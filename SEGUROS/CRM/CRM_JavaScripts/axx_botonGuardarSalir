@@ -1,0 +1,30 @@
+function boton(primaryControl)
+{
+	var formContext = primaryControl;
+	var globalContext = Xrm.Utility.getGlobalContext();
+//    var appUrl = globalContext.getCurrentAppUrl();
+//    var campaniaId = formContext.getAttribute("axx_campanaorigen").getValue()[0].id.replace('{', '').replace('}', '');
+//    //var urlAtras = appUrl +"&forceUCI=1&pagetype=entityrecord&etn=campaign&id="+ campaniaId;
+//    
+//    var pageProperty = {
+//
+//    pageType: "entityrecord",
+//    entityName: "campaign",
+//    formType: 2,
+//    entityId: campaniaId//guid of record
+//    };
+          
+    formContext.getAttribute("axx_usuarioactual").setValue(null);
+//    var lookupOptions = {};
+//    lookupOptions.entityType = "axx_ventadirecta";
+//    Xrm.Utility.refreshParentGrid(lookupOptions);
+    formContext.data.entity.save("saveandclose");
+    //window.close(true);
+//    setTimeout(function () {
+//	Xrm.Navigation.navigateTo(pageProperty);
+   
+//    Xrm.Utility.closeProgressIndicator();
+//    
+//    }, 1000);
+
+}
